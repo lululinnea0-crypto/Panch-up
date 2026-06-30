@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimizado -->
+    <title>PANCHUP | Street Food Premium & +1000 Aura</title>
+    <meta name="description" content="Panchos premium con la verdadera cultura urbana. Sabor callejero, cheddar extremo, panceta crocante y el mejor bajón.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandPink: '#F20A67',
+                        brandBlack: '#0F0F10',
+                        brandWhite: '#F5F5F5',
+                        darkGrey: '#18181C',
+                        lightGrey: '#26262B'
+                    },
+                    fontFamily: {
+                        urban: ['Impact', 'Arial Black', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0F0F10;
+            color: #F5F5F5;
+            overflow-x: hidden;
+        }
+        /* Textura sutil estilo graffiti/grano para el fondo */
+        .graffiti-bg {
+            background-image: radial-gradient(rgba(242, 10, 103, 0.15) 1px, transparent 0), radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px #F20A67;
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="graffiti-bg">
+
+    <!-- NAV BAR -->
+    <nav class="sticky top-0 z-50 bg-brandBlack/90 backdrop-blur-md border-b border-brandPink/10 px-6 py-4 flex justify-between items-center max-w-6xl mx-auto rounded-b-2xl">
+        <span class="font-urban text-3xl tracking-wide text-brandWhite">PANCH<span class="text-brandPink">UP</span></span>
+        <div class="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-wider">
+            <a href="#menu" class="hover:text-brandPink transition">Menú</a>
+            <a href="#combos" class="hover:text-brandPink transition">Combos</a>
+            <a href="#pasos" class="hover:text-brandPink transition">Cómo funciona</a>
+        </div>
+        <button onclick="toggleCart()" class="relative bg-darkGrey p-3 rounded-full border border-white/5 hover:border-brandPink/40 transition">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-brandPink"></i>
+            <span id="badge-count" class="absolute -top-1 -right-1 bg-brandPink text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative max-w-6xl mx-auto px-6 pt-12 pb-24 grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+        <!-- Efecto Graffiti de fondo -->
+        <div class="absolute top-10 left-10 w-72 h-72 bg-brandPink/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="space-y-6 z-10 text-center md:text-left">
+            <span class="inline-block bg-brandPink/10 text-brandPink border border-brandPink/30 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+                ⚡ STREET FOOD PREMIUM
+            </span>
+            <h1 class="font-urban text-6xl md:text-8xl uppercase leading-none tracking-tight text-brandWhite">
+                +1000 DE AURA <br>
+                <span class="text-brandPink drop-shadow-[0_4px_20px_rgba(242,10,103,0.4)]">SI TE COMES</span> <br>
+                ESTOS PANCHOS
+            </h1>
+            <p class="text-zinc-400 text-base md:text-lg max-w-md mx-auto md:mx-0 font-light">
+                Inspirados en la cultura urbana, el graffiti y las mejores hamburgueserías del mundo. Salchicha alemana premium, pan nube artesanal y combinaciones criminales.
+            </p>
+            <div class="pt-4">
+                <a href="#menu" class="inline-block bg-brandPink hover:bg-opacity-90 text-white font-black uppercase tracking-wider text-sm py-4 px-10 rounded-xl transition transform hover:-translate-y-1 shadow-[0_4px_20px_rgba(242,10,103,0.3)]">
+                    Pedir ahora
+                </a>
+            </div>
+        </div>
+
+        <!-- Imagen Destacada del Box Especial -->
+        <div class="relative flex justify-center items-center group z-10">
+            <div class="absolute w-80 h-80 bg-brandPink rounded-3xl rotate-6 opacity-5 blur-xl group-hover:rotate-12 transition duration-500"></div>
+            <!-- Contenedor simulación de Foto Real / Box Premium -->
+            <div class="w-full max-w-[380px] aspect-square bg-darkGrey border-2 border-brandPink/20 rounded-3xl p-6 shadow-2xl flex flex-col justify-between relative overflow-hidden transform hover:scale-[1.02] transition duration-300">
+                <div class="absolute -right-10 -top-10 font-urban text-9xl text-white/[0.02] pointer-events-none select-none">UP</div>
+                <div class="flex justify-between items-start">
+                    <span class="bg-brandPink text-white font-black text-xs px-3 py-1 rounded-md uppercase tracking-wider">BOX ORIGINAL</span>
+                    <span class="text-zinc-500 font-bold text-sm">#PANCHUP</span>
+                </div>
+                <!-- Simulación gráfica / Contenedor para colocar tu foto -->
+                <div class="text-8xl text-center my-6 filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)]">🌭</div>
+                <div class="bg-brandBlack/60 backdrop-blur-md p-3 rounded-xl border border-white/5">
+                    <p class="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Visual de referencia</p>
+                    <p class="text-sm font-bold text-brandWhite mt-0.5">Pancho Cheddar & Bacon en Caja Urbana</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROMOCIONES & MÁS VENDIDOS -->
+    <section class="max-w-6xl mx-auto px-6 py-12 grid sm:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-brandPink to-purple-800 p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group shadow-lg">
+            <div class="absolute right-[-20px] bottom-[-20px] font-urban text-9xl text-black/10 select-none">HOT</div>
+            <div>
+                <span class="bg-brandBlack text-brandPink text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">PROMO DESTACADA</span>
+                <h3 class="font-urban text-4xl uppercase mt-4 text-white leading-tight">2x1 En Americanos</h3>
+                <p class="text-white/80 text-sm mt-1 max-w-xs">Activando el bajón urbano de martes a jueves de 19 a 21hs.</p>
+            </div>
+            <button onclick="scrollToSection('menu')" class="mt-8 bg-brandBlack hover:bg-opacity-80 text-white font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-xl w-fit transition">Aprovechar</button>
+        </div>
+        <div class="bg-darkGrey border border-white/5 p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group shadow-lg">
+            <div>
+                <span class="bg-brandPink/10 text-brandPink border border-brandPink/20 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">MÁS VENDIDO 🔥</span>
+                <h3 class="font-urban text-4xl uppercase mt-4 text-brandWhite leading-tight">Cheddar Bomb Box</h3>
+                <p class="text-zinc-400 text-sm mt-1 max-w-xs">El favorito de las calles de Córdoba. Doble dosis de queso fundido.</p>
+            </div>
+            <button onclick="scrollToSection('menu')" class="mt-8 bg-lightGrey hover:bg-opacity-80 text-brandWhite border border-white/5 font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-xl w-fit transition">Ver en Menú</button>
+        </div>
+    </section>
+
+    <!-- MENÚ PRINCIPAL -->
+    <section id="menu" class="max-w-6xl mx-auto px-6 py-16 space-y-12">
+        <div class="text-center md:text-left">
+            <h2 class="font-urban text-5xl md:text-7xl uppercase text-brandWhite">NUESTROS <span class="text-stroke">PANCHOS</span></h2>
+            <p class="text-zinc-400 text-sm md:text-base mt-2">Seleccioná tu base urbana premium. Todos salen con salchicha artesanal de alta calidad.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="contenedor-panchos">
+            <!-- Render dinámico por JS para las tarjetas de Panchos -->
+        </div>
+    </section>
+
+    <!-- COMBOS ESPECIALES -->
+    <section id="combos" class="max-w-6xl mx-auto px-6 py-16 space-y-12 bg-darkGrey/40 rounded-3xl border border-white/[0.02] p-8">
+        <div class="text-center">
+            <span class="text-brandPink font-bold text-xs uppercase tracking-widest">AHORRÁ FUERTE</span>
+            <h2 class="font-urban text-5xl md:text-6xl uppercase text-brandWhite mt-1">COMBOS <span class="text-brandPink">UPP!</span></h2>
+            <p class="text-zinc-400 text-sm mt-2">Todos los combos incluyen porción de Papas Fritas medianas y Bebida a elección.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6" id="contenedor-combos">
+            <!-- Render dinámico por JS para los Combos -->
+        </div>
+    </section>
+
+    <!-- PERSONALIZACIÓN / EXTRAS -->
+    <section class="max-w-4xl mx-auto px-6 py-16 text-center space-y-8">
+        <div class="space-y-2">
+            <h2 class="font-urban text-4xl uppercase text-brandWhite">SUBILE EL VOLUMEN (EXTRAS)</h2>
+            <p class="text-zinc-400 text-sm">¿Te quedaste manija? Sumale los toppings que quieras a cualquiera de tus productos en el carrito.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3" id="contenedor-extras">
+            <!-- Render dinámico de Toppings / Extras -->
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="pasos" class="max-w-6xl mx-auto px-6 py-20 border-t border-white/5 space-y-16">
+        <div class="text-center">
+            <h2 class="font-urban text-4xl md:text-5xl uppercase text-brandWhite">CÓMO MANDARLE <span class="text-brandPink">PLAY</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-12 text-center relative">
+            <div class="space-y-4 group">
+                <div class="w-16 h-16 bg-darkGrey border border-brandPink/30 text-brandPink flex items-center justify-center text-xl font-bold rounded-2xl mx-auto group-hover:bg-brandPink group-hover:text-white transition duration-300 shadow-lg">1️⃣</div>
+                <h3 class="text-lg font-bold uppercase tracking-wide text-brandWhite">Elegí tu pancho</h3>
+                <p class="text-zinc-400 text-sm max-w-xs mx-auto">Explorá el menú urbano, seleccioná tus panchos favoritos o combos con papas.</p>
+            </div>
+            <div class="space-y-4 group">
+                <div class="w-16 h-16 bg-darkGrey border border-brandPink/30 text-brandPink flex items-center justify-center text-xl font-bold rounded-2xl mx-auto group-hover:bg-brandPink group-hover:text-white transition duration-300 shadow-lg">2️⃣</div>
+                <h3 class="text-lg font-bold uppercase tracking-wide text-brandWhite">Personalizalo</h3>
+                <p class="text-zinc-400 text-sm max-w-xs mx-auto">Sumale cheddar fundido, panceta crujiente, pepinillos o jalapeños al gusto.</p>
+            </div>
+            <div class="space-y-4 group">
+                <div class="w-16 h-16 bg-darkGrey border border-brandPink/30 text-brandPink flex items-center justify-center text-xl font-bold rounded-2xl mx-auto group-hover:bg-brandPink group-hover:text-white transition duration-300 shadow-lg">3️⃣</div>
+                <h3 class="text-lg font-bold uppercase tracking-wide text-brandWhite">Recibilo en casa</h3>
+                <p class="text-zinc-400 text-sm max-w-xs mx-auto">Finalizás por WhatsApp y te lo mandamos en nuestro empaque premium térmico.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL / SIDEBAR DEL CARRITO FLOTANTE -->
+    <div id="sidebar-carrito" class="fixed inset-y-0 right-0 w-full max-w-md bg-darkGrey/95 backdrop-blur-xl border-l border-brandPink/20 z-50 transform translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between hidden shadow-2xl">
+        <div>
+            <div class="flex justify-between items-center pb-6 border-b border-white/5">
+                <h3 class="font-urban text-2xl uppercase text-brandWhite flex items-center gap-2">Tu Pedido <span class="text-brandPink">Upp</span></h3>
+                <button onclick="toggleCart()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div id="lista-items-carrito" class="space-y-4 mt-6 overflow-y-auto max-h-[50vh] pr-2">
+                <!-- Items van acá por JS -->
+            </div>
+        </div>
+
+        <div class="space-y-4 pt-6 border-t border-white/5">
+            <!-- Selección Toppings Globales / Extras desde el Carrito -->
+            <div class="bg-brandBlack p-4 rounded-xl border border-white/5">
+                <div class="flex justify-between text-sm text-zinc-400 mb-2"><span>Subtotal</span><span id="subtotal-val">$0</span></div>
+                <div class="flex justify-between font-bold text-lg text-brandWhite"><span>Total estimado</span><span id="total-val" class="text-brandPink">$0</span></div>
+            </div>
+
+            <div class="space-y-2">
+                <input type="text" id="cart-nombre" placeholder="Tu Nombre completo" class="w-full bg-brandBlack border border-white/5 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brandPink">
+                <input type="text" id="cart-direccion" placeholder="Dirección de Envío" class="w-full bg-brandBlack border border-white/5 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brandPink">
+                <select id="cart-pago" class="w-full bg-brandBlack border border-white/5 rounded-xl p-3 text-sm text-zinc-400 focus:outline-none focus:border-brandPink">
+                    <option value="Efectivo">Pagar con Efectivo</option>
+                    <option value="Mercado Pago">Mercado Pago (Transferencia)</option>
+                </select>
+            </div>
+
+            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-brandPink hover:bg-opacity-90 text-white font-bold py-4 rounded-xl text-sm uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition">
+                <i data-lucide="send" class="w-4 h-4"></i> Enviar Pedido a WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-darkGrey border-t border-white/5 px-6 py-12 text-sm text-zinc-500">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <span class="font-urban text-3xl text-brandWhite">PANCH<span class="text-brandPink">UP</span></span>
+                <p class="text-xs text-zinc-400">Auténtica cultura de calle. El bajón premium definitivo.</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-brandWhite font-bold uppercase tracking-wider text-xs">Atención al cliente</h4>
+                <p class="text-xs">Martes a Domingos<br>19:00 a 00:30 hs</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-brandWhite font-bold uppercase tracking-wider text-xs">Zona de reparto</h4>
+                <p class="text-xs">Córdoba Capital (Sujeto a radio de cadetería oficial).</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-brandWhite font-bold uppercase tracking-wider text-xs">Redes</h4>
+                <div class="flex gap-4 pt-1">
+                    <a href="#" class="text-zinc-400 hover:text-brandPink transition flex items-center gap-1 text-xs"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a>
+                    <a href="#" class="text-zinc-400 hover:text-brandPink transition flex items-center gap-1 text-xs"><i data-lucide="phone" class="w-4 h-4"></i> WhatsApp</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center pt-8 mt-8 border-t border-white/5 text-[11px] uppercase tracking-widest">
+            ⚡ PANCHUP © 2026 — ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE FUNCIONAMIENTO INTERACTIVO (JAVASCRIPT) -->
+    <script>
+        // Catálogo Base de Datos Oficial
+        const panchos = [
+            { id: 1, nombre: 'Pancho Simple', desc: 'Salchicha artesanal premium, aderezada con la cantidad justa de kétchup y mostaza.', precio: 3200, emoji: '🌭', stock: true },
+            { id: 2, nombre: 'Pancho Completo', desc: 'Salchicha premium, lluvia de papitas pay crujientes, kétchup, mostaza y mayonesa clásica.', precio: 3700, emoji: '🌭', stock: true },
+            { id: 3, nombre: 'Pancho Cheddar', desc: 'Para los fanáticos: bañado en auténtico queso cheddar fundido y panceta crocante picada.', precio: 4300, emoji: '🧀', stock: true },
+            { id: 4, nombre: 'Pancho Americano', desc: 'Nuestra corona de oro: salchicha premium, cheddar cremoso, panceta y cebolla caramelizada.', precio: 4600, emoji: '👑', stock: true }
+        ];
+
+        const combos = [
+            { id: 101, nombre: 'Combo Simple', desc: 'Pancho Simple + Papas Fritas Medianas + Bebida helada a elección.', precio: 5100, emoji: '🔥' },
+            { id: 102, nombre: 'Combo Completo', desc: 'Pancho Completo + Papas Fritas Medianas + Bebida helada a elección.', precio: 5600, emoji: '🔥' },
+            { id: 103, nombre: 'Combo Americano', desc: 'Pancho Americano + Papas Fritas Medianas + Bebida helada a elección.', precio: 6500, emoji: '🔥' }
+        ];
+
+        const extras = [
+            { id: 'ex1', nombre: 'Cheddar', precio: 600 },
+            { id: 'ex2', nombre: 'Panceta', precio: 700 },
+            { id: 'ex3', nombre: 'Cebolla caramelizada', precio: 500 },
+            { id: 'ex4', nombre: 'Papitas pay', precio: 400 },
+            { id: 'ex5', nombre: 'Jalapeños', precio: 600 },
+            { id: 'ex6', nombre: 'Pepinillos', precio: 500 }
+        ];
+
+        let carrito = [];
+
+        function renderizarContenido() {
+            const contPanchos = document.getElementById('contenedor-panchos');
+            const contCombos = document.getElementById('contenedor-combos');
+            const contExtras = document.getElementById('contenedor-extras');
+
+            // Render Panchos
+            contPanchos.innerHTML = panchos.map(p => `
+                <div class="bg-darkGrey border border-white/5 rounded-2xl p-5 flex flex-col justify-between hover:border-brandPink/30 transition group duration-300">
+                    <div>
+                        <div class="text-5xl my-3 transform group-hover:scale-110 transition duration-300">${p.emoji}</div>
+                        <h3 class="font-bold text-lg text-brandWhite uppercase tracking-wide">${p.nombre}</h3>
+                        <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center pt-3 border-t border-white/5">
+                        <span class="font-urban text-2xl text-brandPink">$${p.precio}</span>
+                        <button onclick="agregarAlCarrito('${p.nombre}', ${p.precio})" class="bg-brandPink hover:bg-opacity-90 text-white font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-xl transition">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Combos
+   
