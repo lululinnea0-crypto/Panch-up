@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANCH UP | App Oficial Premium</title>
+    <meta name="description" content="+1000 de aura si te comes estos panchos. Bajón urbano premium instalable.">
+    
+    <meta name="theme-color" content="#0F0F10">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0F0F10',
+                        brandPink: '#F20A67',
+                        brandWhite: '#F5F5F5',
+                        darkGrey: '#1E1E1E',
+                        lightGrey: '#EAEAEA',
+                        mustard: '#F5B321',
+                        ketchup: '#D72638'
+                    },
+                    fontFamily: { urban: ['Impact', 'Arial Black', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0F0F10; color: #F5F5F5; -webkit-tap-highlight-color: transparent; }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+        .graffiti-overlay { background-image: radial-gradient(#f20a6715 1.5px, transparent 1.5px); background-size: 32px 32px; }
+    </style>
+</head>
+<body class="graffiti-overlay min-h-screen pb-24">
+
+    <header class="w-full max-w-md mx-auto px-6 pt-5 pb-3 flex justify-between items-center z-40 relative">
+        <img src="logo.png" alt="Logo Panch Up" class="h-12 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(242,10,103,0.3)]">
+        <div class="flex gap-2">
+            <button onclick="openSearch()" class="p-3 bg-darkGrey rounded-full border border-white/5 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F20A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <button onclick="openAdmin()" class="p-3 bg-darkGrey rounded-full border border-white/5 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="view-inicio" class="max-w-md mx-auto px-6 space-y-8 block">
+        <div class="text-center py-6 space-y-4">
+            <h1 class="font-urban text-5xl tracking-wide uppercase leading-tight text-brandWhite">
+                +1000 DE AURA <br><span class="text-brandPink shadow-xl">SI TE COMES</span><br>ESTOS PANCHOS 
+            </h1>
+            <button onclick="switchTab('menu')" class="w-full bg-brandPink hover:bg-opacity-95 text-white font-extrabold py-4 px-6 rounded-2xl tracking-wider text-base shadow-[0_4px_25px_rgba(242,10,103,0.4)] transition transform active:scale-95">
+                PEDIR AHORA
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-lg font-extrabold flex items-center gap-2 mb-3">⭐ Más Vendidos</h3>
+                <div class="flex gap-4 overflow-x-auto scrollbar-none pb-2" id="carousel-vendidos"></div>
+            </div>
+            <div>
+                <h3 class="text-lg font-extrabold flex items-center gap-2 mb-3">🔥 Recomendados</h3>
+                <div class="flex gap-4 overflow-x-auto scrollbar-none pb-2" id="carousel-recomendados"></div>
+            </div>
+            <div>
+                <h3 class="text-lg font-extrabold flex items-center gap-2 mb-3">🎉 Promociones</h3>
+                <div class="flex gap-4 overflow-x-auto scrollbar-none pb-2">
+                    <div class="min-w-[280px] bg-gradient-to-br from-brandPink to-ketchup p-5 rounded-2xl flex flex-col justify-between h-40 shadow-lg relative overflow-hidden">
+                        <div>
+                            <span class="bg-black/40 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Bajón Club</span>
+                            <h4 class="font-urban text-2xl mt-1 text-white uppercase leading-none">Envío Gratis Córdoba</h4>
+                        </div>
+                        <p class="text-[11px] text-white/80">Superando los $12.000 en tu zona céntrica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-menu" class="max-w-md mx-auto px-6 space-y-6 hidden">
+        <div class="flex gap-2 overflow-x-auto scrollbar-none py-2">
+            <button onclick="filterCategory(event, 'todos')" class="cat-btn bg-brandPink text-white text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap">⚡ Todo</button>
+            <button onclick="filterCategory(event, 'Clásicos')" class="cat-btn bg-darkGrey text-zinc-400 text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap">🌭 Clásicos</button>
+            <button onclick="filterCategory(event, 'Especiales')" class="cat-btn bg-darkGrey text-zinc-400 text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap">🔥 Especiales</button>
+            <button onclick="filterCategory(event, 'Combos')" class="cat-btn bg-darkGrey text-zinc-400 text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap">🍟 Combos</button>
+            <button onclick="filterCategory(event, 'Bebidas')" class="cat-btn bg-darkGrey text-zinc-400 text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap">🥤 Bebidas</button>
+        </div>
+
+        <div class="space-y-4" id="menu-products-container"></div>
+    </main>
+
+    <main id="view-carrito" class="max-w-md mx-auto px-6 space-y-6 hidden">
+        <h2 class="font-urban text-3xl uppercase">Tu Carrito</h2>
+        <div id="cart-items-container" class="space-y-3"></div>
+        
+        <div id="cart-totals-box" class="hidden bg-darkGrey p-5 rounded-2xl space-y-3 border border-white/5">
+            <div class="flex justify-between text-zinc-400 text-sm"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+            <div class="flex justify-between text-zinc-400 text-sm"><span>Costo Envío</span><span id="cart-envio">$0</span></div>
+            <div class="flex justify-between font-black text-xl text-brandWhite border-t border-white/5 pt-3"><span>Total</span><span id="cart-total" class="text-brandPink">$0</span></div>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button onclick="clearCart()" class="text-xs bg-black/40 text-zinc-400 font-bold py-3 rounded-xl border border-white/5">Vaciar Carrito</button>
+                <button onclick="switchTab('menu')" class="text-xs bg-lightGrey text-black font-bold py-3 rounded-xl">Seguir Comprando</button>
+            </div>
+            <button onclick="openCheckout()" class="w-full bg-brandPink text-white font-bold py-4 rounded-xl text-sm uppercase tracking-wide mt-2 shadow-lg">Finalizar Pedido</button>
+        </div>
+    </main>
+
+    <div id="modal-details" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end justify-center hidden">
+        <div class="bg-darkGrey w-full max-w-md rounded-t-3xl p-6 space-y-5 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 id="modal-title" class="font-urban text-2xl text-brandWhite uppercase">Pancho Custom</h3>
+                    <p id="modal-price" class="text-brandPink font-bold text-lg mt-0.5">$0</p>
+                </div>
+                <button onclick="closeDetails()" class="p-2 bg-black/40 rounded-full text-zinc-400 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <img id="modal-img" src="" alt="" class="w-full h-40 object-cover rounded-xl shadow-inner">
+            
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">¿Quitar Ingredientes base?</h4>
+                <div class="flex flex-wrap gap-2" id="modal-remove-container"></div>
+            </div>
+
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">Sumar Extras Premium</h4>
+                <div class="space-y-2" id="modal-extras-container"></div>
+            </div>
+
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">Observaciones adicionales</h4>
+                <input type="text" id="modal-obs" placeholder="Ej: Sin aderezos, bien caliente..." class="w-full bg-brandBg border border-white/5 p-3.5 rounded-xl text-sm focus:outline-none focus:border-brandPink">
+            </div>
+
+            <button onclick="confirmAddToCart()" class="w-full bg-brandPink text-white font-bold py-4 rounded-xl text-sm uppercase tracking-wider shadow-lg">Confirmar e Incluir</button>
+        </div>
+    </div>
+
+    <div id="view-checkout" class="fixed inset-0 bg-brandBg z-50 p-6 overflow-y-auto hidden">
+        <div class="max-w-md mx-auto space-y-6">
+            <div class="flex items-center gap-3">
+                <button onclick="closeCheckout()" class="p-2 bg-darkGrey rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+                <h2 class="font-urban text-2xl uppercase">Datos de Entrega</h2>
+            </div>
+            <div class="space-y-3">
+                <input type="text" id="chk-nombre" placeholder="Nombre completo" class="w-full bg-darkGrey border border-white/5 p-4 rounded-xl text-sm text-white focus:outline-none focus:border-brandPink">
+                <input type="tel" id="chk-telefono" placeholder="Teléfono celular" class="w-full bg-darkGrey border border-white/5 p-4 rounded-xl
+  
