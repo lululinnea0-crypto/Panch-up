@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANCH UP | Premium Street Food</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0F0F10',
+                        brandPink: '#F20A67',
+                        brandWhite: '#F5F5F5',
+                        brandDarkGray: '#1E1E1E',
+                        brandLightGray: '#EAEAEA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0F0F10; 
+            color: #F5F5F5; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .font-urban-title { 
+            font-family: 'Cabinet Grotesk', 'Arial Black', sans-serif; 
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+        }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="min-h-screen pb-28 relative">
+
+    <header class="w-full max-w-md mx-auto px-6 pt-6 pb-4 flex justify-between items-center bg-brandBg/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="flex flex-col">
+            <span class="text-2xl font-urban-title font-black tracking-tighter text-brandWhite">
+                PANCH<span class="text-brandPink">UP.</span>
+            </span>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="openSearch()" class="p-3 bg-brandDarkGray hover:bg-neutral-800 rounded-full smooth-transition border border-neutral-800 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5F5F5" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <button onclick="openAdmin()" class="p-3 bg-brandDarkGray hover:bg-neutral-800 rounded-full smooth-transition border border-neutral-800 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F20A67" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="view-inicio" class="w-full max-w-md mx-auto px-6 space-y-12 block">
+        <div class="pt-4 text-center space-y-6">
+            <div class="inline-block bg-brandPink/10 border border-brandPink/30 text-brandPink text-[11px] font-bold px-4 py-1.5 rounded-full tracking-widest uppercase">
+                ⚡ Street Food Premium
+            </div>
+            <h1 class="font-urban-title text-4xl text-brandWhite leading-none tracking-tight">
+                +1000 de aura <br><span class="text-brandPink">si te comes estos panchos</span>
+            </h1>
+            <div class="pt-2">
+                <button onclick="switchTab('menu')" class="w-full sm:w-auto bg-brandPink hover:bg-opacity-90 text-brandWhite font-urban-title text-base py-4 px-10 rounded-full shadow-lg shadow-brandPink/20 smooth-transition active:scale-95 tracking-wide">
+                    PEDIR AHORA
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-brandDarkGray to-neutral-900 text-brandWhite rounded-[2rem] p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between h-48 border border-neutral-800">
+            <div class="z-10 max-w-[65%] space-y-1">
+                <span class="bg-brandPink text-brandWhite text-[9px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">BAJÓN CLUB</span>
+                <h3 class="font-urban-title text-2xl pt-2 leading-none">ENVÍO GRATIS <br>CÓRDOBA</h3>
+                <p class="text-[11px] text-neutral-400 mt-2">Superando los $12.000 en tu zona céntrica.</p>
+            </div>
+            <div class="absolute right-[-15px] bottom-[-15px] w-36 h-36 bg-brandDarkGray rounded-full border-4 border-brandPink/30 shadow-2xl flex items-center justify-center text-6xl select-none">
+                🌭
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="font-urban-title text-xl text-brandWhite tracking-wide flex items-center gap-2">
+                <span class="w-2 h-2 bg-brandPink rounded-full"></span> Más vendidos
+            </h3>
+            <div class="flex gap-4 overflow-x-auto scrollbar-none pb-4" id="carousel-vendidos">
+                </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="font-urban-title text-xl text-brandWhite tracking-wide flex items-center gap-2">
+                <span class="w-2 h-2 bg-neutral-600 rounded-full"></span> Recomendados
+            </h3>
+            <div class="flex gap-4 overflow-x-auto scrollbar-none pb-4" id="carousel-recomendados">
+                </div>
+        </div>
+    </main>
+
+    <main id="view-menu" class="w-full max-w-md mx-auto px-6 space-y-8 hidden">
+        <div class="flex gap-2 overflow-x-auto scrollbar-none py-2 sticky top-20 bg-brandBg/90 backdrop-blur-sm z-30">
+            <button onclick="filterCategory(event, 'todos')" class="cat-btn bg-brandPink text-brandWhite text-xs font-bold px-5 py-3 rounded-full whitespace-nowrap smooth-transition shadow-md shadow-brandPink/10">⚡ Todo</button>
+            <button onclick="filterCategory(event, 'Clásicos')" class="cat-btn bg-brandDarkGray text-neutral-400 border border-neutral-800 text-xs font-bold px-5 py-3 rounded-full whitespace-nowrap smooth-transition">🌭 Clásicos</button>
+            <button onclick="filterCategory(event, 'Especiales')" class="cat-btn bg-brandDarkGray text-neutral-400 border border-neutral-800 text-xs font-bold px-5 py-3 rounded-full whitespace-nowrap smooth-transition">🔥 Especiales</button>
+            <button onclick="filterCategory(event, 'Combos')" class="cat-btn bg-brandDarkGray text-neutral-400 border border-neutral-800 text-xs font-bold px-5 py-3 rounded-full whitespace-nowrap smooth-transition">🍟 Combos</button>
+            <button onclick="filterCategory(event, 'Bebidas')" class="cat-btn bg-brandDarkGray text-neutral-400 border border-neutral-800 text-xs font-bold px-5 py-3 rounded-full whitespace-nowrap smooth-transition">🥤 Bebidas</button>
+        </div>
+        <div class="space-y-6" id="menu-products-container"></div>
+    </main>
+
+    <main id="view-carrito" class="w-full max-w-md mx-auto px-6 space-y-8 hidden">
+        <h2 class="font-urban-title text-3xl text-brandWhite">Tu Carrito</h2>
+        <div id="cart-items-container" class="space-y-4"></div>
+        
+        <div id="cart-totals-box" class="hidden bg-brandDarkGray p-6 rounded-[2rem] space-y-4 border border-neutral-800 shadow-xl">
+            <div class="flex justify-between text-neutral-400 text-xs"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+            <div class="flex justify-between text-neutral-400 text-xs"><span>Envío</span><span id="cart-envio">$0</span></div>
+            <div class="flex justify-between font-urban-title font-black text-xl text-brandWhite border-t border-neutral-800 pt-4"><span>Total</span><span id="cart-total" class="text-brandPink">$0</span></div>
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button onclick="clearCart()" class="text-xs bg-neutral-900 text-neutral-400 hover:text-brandWhite font-bold py-3.5 rounded-full smooth-transition border border-neutral-800">Vaciar Carrito</button>
+                <button onclick="switchTab('menu')" class="text-xs bg-neutral-800 text-brandWhite font-bold py-3.5 rounded-full smooth-transition">Seguir Comprando</button>
+            </div>
+            <button onclick="openCheckout()" class="w-full bg-brandPink hover:bg-opacity-90 text-brandWhite font-urban-title py-4 rounded-full text-sm uppercase tracking-wider mt-2 shadow-lg shadow-brandPink/10 smooth-transition">Finalizar pedido</button>
+        </div>
+    </main>
+
+    <div id="modal-details" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-end justify-center hidden">
+        <div class="bg-brandDarkGray w-full max-w-md rounded-t-[2.5rem] p-6 space-y-6 max-h-[85vh] overflow-y-auto border-t border-neutral-800 shadow-2xl scrollbar-none">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 id="modal-title" class="font-urban-title text-2xl text-brandWhite">Personalización</h3>
+                    <p id="modal-price" class="text-brandPink font-black text-lg mt-1">$0</p>
+                </div>
+                <button onclick="closeDetails()" class="p-3 bg-neutral-900 rounded-full text-neutral-400 hover:text-brandWhite border border-neutral-800 smooth-transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="modal-img-container" class="w-full h-48 rounded-2xl overflow-hidden bg-neutral-900 flex items-center justify-center text-6xl border border-neutral-800 select-none">🌭</div>
+            <div class="space-y-3">
+                <h4 class="text-[11px] font-black text-neutral-400 uppercase tracking-widest">❌ Quitar ingredientes</h4>
+                <div class="flex flex-wrap gap-2" id="modal-remove-container"></div>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-[11px] font-black text-neutral-400 uppercase tracking-widest">✨ Agregar Extras</h4>
+                <div class="space-y-2" id="modal-extras-container"></div>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-[11px] font-black text-neutral-400 uppercase tracking-widest">✍️ Observaciones</h4>
+                <input type="text" id="modal-obs" placeholder="Ej: Sin aderezos..." class="w-full bg-neutral-900 border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite placeholder-neutral-500 focus:outline-none focus:border-brandPink">
+            </div>
+            <button onclick="confirmAddToCart()" class="w-full bg-brandPink text-brandWhite font-urban-title py-4 rounded-full text-sm uppercase tracking-wider shadow-lg">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <div id="view-checkout" class="fixed inset-0 bg-brandBg z-50 p-6 overflow-y-auto hidden">
+        <div class="max-w-md mx-auto space-y-8">
+            <div class="flex items-center gap-4">
+                <button onclick="closeCheckout()" class="p-3 bg-brandDarkGray border border-neutral-800 rounded-full flex items-center justify-center text-brandWhite">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+                <h2 class="font-urban-title text-2xl text-brandWhite">Datos de Entrega</h2>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="chk-nombre" placeholder="Nombre completo" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <input type="tel" id="chk-telefono" placeholder="Teléfono celular" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <input type="text" id="chk-direccion" placeholder="Dirección / Calle y Altura" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <input type="text" id="chk-barrio" placeholder="Barrio" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <input type="text" id="chk-referencia" placeholder="Referencia de envío" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="setDelivery(true)" id="btn-deliv" class="py-3.5 rounded-full font-urban-title text-xs bg-brandPink text-brandWhite shadow-md">Delivery</button>
+                    <button onclick="setDelivery(false)" id="btn-take" class="py-3.5 rounded-full font-urban-title text-xs bg-brandDarkGray text-neutral-400 border border-neutral-800">Retiro Local</button>
+                </div>
+                <select id="chk-pago" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                    <option value="Efectivo">Efectivo (Pagas al recibir)</option>
+                    <option value="Mercado Pago">Mercado Pago</option>
+                    <option value="Transferencia">Transferencia Bancaria</option>
+                </select>
+            </div>
+            <button onclick="processOrder()" class="w-full bg-brandPink text-brandWhite font-urban-title py-4 rounded-full text-base uppercase tracking-wider shadow-lg">Confirmar y enviar</button>
+        </div>
+    </div>
+
+    <div id="modal-search" class="fixed inset-0 bg-brandBg z-50 p-6 hidden">
+        <div class="max-w-md mx-auto space-y-6">
+            <div class="flex gap-3">
+                <input type="text" id="search-input" oninput="executeSearch()" placeholder="Buscar en el menú..." class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <button onclick="closeSearch()" class="bg-neutral-800 px-5 rounded-full font-bold text-xs text-brandWhite">Cerrar</button>
+            </div>
+            <div id="search-results" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <div id="view-admin" class="fixed inset-0 bg-brandBg z-50 p-6 overflow-y-auto hidden">
+        <div class="max-w-md mx-auto space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="font-urban-title text-2xl text-brandWhite">Control de Stock</h2>
+                <button onclick="closeAdmin()" class="p-2.5 bg-brandDarkGray border border-neutral-800 rounded-full text-brandWhite">❌</button>
+            </div>
+            <div id="admin-auth" class="space-y-3">
+                <input type="password" id="admin-pass" placeholder="Clave de administrador" class="w-full bg-brandDarkGray border border-neutral-800 p-4 rounded-xl text-sm text-brandWhite focus:outline-none">
+                <button onclick="loginAdmin()" class="w-full bg-brandPink text-brandWhite font-urban-title py-3.5 rounded-full text-xs">Ingresar</button>
+            </div>
+            <div id="admin-dashboard" class="hidden space-y-6">
+                <div class="grid grid-cols-2 gap-3 bg-brandDarkGray p-4 rounded-2xl border border-neutral-800 text-center">
+                    <div><p class="text-[10px] text-neutral-400 font-bold uppercase">Costo de Envío</p><input type="number" id="cfg-envio" value="450" class="w-20 bg-neutral-900 border border-neutral-800 rounded mt-1 p-1 text-center text-brandPink focus:outline-none" onchange="saveConfig()"></div>
+                    <div><p class="text-[10px] text-neutral-400 font-bold uppercase">Horario</p><p class="font-bold text-xs text-brandWhite mt-2">19:00 - 00:30</p></div>
+                </div>
+                <div id="admin-products-list" class="space-y-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-0 inset-x-0 bg-brandDarkGray/95 backdrop-blur-md border-t border-neutral-800/80 py-4 px-8 flex justify-around items-center z-40 max-w-md mx-auto rounded-t-[2rem] shadow-2xl">
+        <button onclick="switchTab('inicio')" id="nav-inicio" class="flex flex-col items-center text-brandPink scale-110">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            <span class="text-[9px] font-black uppercase tracking-wider mt-1.5">Inicio</span>
+        </button>
+        <button onclick="switchTab('menu')" id="nav-menu" class="flex flex-col items-center text-neutral-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span class="text-[9px] font-black uppercase tracking-wider mt-1.5">Menú</span>
+        </button>
+        <button onclick="switchTab('carrito')" id="nav-carrito" class="flex flex-col items-center text-neutral-500 relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span id="nav-cart-badge" class="absolute top-[-4px] right-[-6px] bg-brandPink text-brandWhite font-black text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+            <span class="text-[9px] font-black uppercase tracking-wider mt-1.5">Carrito</span>
+        </button>
+    </nav>
+
+    <script>
+        var productos = [
+            { id: 1, nombre: 'Pancho Simple Aura', cat: 'Clásicos', desc: 'Salchicha premium, aderezos clásicos y la cantidad justa de sabor.', precio: 4500, emoji: '🌭', stock: true, popular: true },
+            { id: 2, nombre: 'Pancho Completo Street', cat: 'Clásicos', desc: 'Salchicha premium, lluvia de papas pay crocantes, mayonesa y aderezos.', precio: 5500, emoji: '🌭', stock: true, popular: false },
+            { id: 3, nombre: 'Pancho Cheddar King', cat: 'Especiales', desc: 'Bañado en abundante queso cheddar fundido y trozos crujientes de panceta.', precio: 6500, emoji: '🧀', stock: true, popular: true },
+            { id: 4, nombre: 'Pancho Americano Crispy', cat: 'Especiales', desc: 'Cheddar cremoso, panceta tostada en hilos y cebolla crispy urbana.', precio: 7000, emoji: '🔥', stock: true, popular: true },
+            { id: 5, nombre: 'Combo Simple Flow', cat: 'Combos', desc: 'Pancho Simple con papas fritas crujientes y gaseosa de 500ml.', precio: 8000, emoji: '🍟', stock: true, popular: false },
+            { id: 6, nombre: 'Combo Completo Premium', cat: 'Combos', desc: 'Pancho Completo, papas fritas abundantes y bebida fresca a elección.', precio: 9000, emoji: '⚡', stock: true, popular: true },
+            { id: 7, nombre: 'Gaseosa 500 ml', cat: 'Bebidas', desc: 'Línea Coca-Cola helada ideal para tu pancho.', precio: 2000, emoji: '🥤', stock: true, popular: false },
+            { id: 8, nombre: 'Agua Saborizada', cat: 'Bebidas', desc: 'Variedad de sabores frescos frutales.', precio: 1800, emoji: '💧', stock: true, popular: false }
+        ];
+
+        var toppingsDisponibles = [
+            { nombre: 'Cheddar', precio: 700 },
+            { nombre: 'Panceta', precio: 1000 },
+            { nombre: 'Cebolla crispy', precio: 600 },
+            { nombre: 'Papas pay', precio: 500 }
+        ];
+
+        var cart = [];
+        var selectedProduct = null;
+        var isDeliv
