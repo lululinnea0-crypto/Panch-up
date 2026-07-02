@@ -226,6 +226,39 @@
 let carrito = [];
 let productoActual = {};
 let checkoutAvanzado = false;
+        // =======================
+// GUARDAR CARRITO
+// =======================
+
+function guardarCarrito() {
+
+    localStorage.setItem(
+
+        "carritoPanchUpp",
+
+        JSON.stringify(carrito)
+
+    );
+
+}
+
+function cargarCarrito() {
+
+    const datos = localStorage.getItem(
+
+        "carritoPanchUpp"
+
+    );
+
+    if(datos){
+
+        carrito = JSON.parse(datos);
+
+        actualizarCarritoUI();
+
+    }
+
+}
 
 // --------------------
 // Abrir / cerrar carrito
@@ -350,7 +383,7 @@ function agregarAlCarritoConfirmado() {
     cerrarModal();
 
     actualizarCarritoUI();
-
+    guardarCarrito();
     toggleCarrito();
 
     }
@@ -465,7 +498,9 @@ function removerDelCarrito(indice){
 
     actualizarCarritoUI();
 
-        }
+    guardarCarrito();
+
+}
  // --------------------
 // Checkout
 // --------------------
@@ -577,7 +612,7 @@ function enviarPedidoWhatsApp() {
 
     );
 
-                                           }
+    cargarCarrito();
     </script>
 </body>
 </html>
