@@ -13,13 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#0B1116',
+                        darkBg: '#080C0E',
                         neonCyan: '#00E5FF',
-                        cardBg: '#121B22',
-                        btnCyan: '#00A8CC',
-                    },
-                    boxShadow: {
-                        'cyan-glow': '0 0 15px rgba(0, 229, 255, 0.3)',
+                        cardBg: '#11181C',
                     }
                 }
             }
@@ -27,17 +23,17 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,900;1,900&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #0B1116; color: #FFFFFF; }
+        body { font-family: 'Poppins', sans-serif; background-color: #080C0E; color: #FFFFFF; }
         .active-tab { color: #00E5FF; border-bottom: 2px solid #00E5FF; }
         .italic-title { font-style: italic; }
     </style>
 </head>
 <body class="overflow-x-hidden min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="bg-darkBg/90 backdrop-blur-md sticky top-0 z-50 px-4 py-4 flex justify-between items-center border-b border-white/5">
+    <!-- HEADER -->
+    <header class="bg-darkBg sticky top-0 z-50 px-4 py-4 flex justify-between items-center border-b border-white/5">
         <div class="flex items-center gap-1">
-            <span class="text-xl font-black tracking-tighter text-white">PANCH <span class="text-neonCyan">UPP</span></span>
+            <span class="text-lg font-black tracking-tighter text-white">PANCH <span class="text-neonCyan">UPP</span></span>
         </div>
         <nav class="flex gap-4 text-xs font-bold uppercase tracking-wider">
             <button onclick="switchTab('inicio')" id="btn-inicio" class="pb-1 active-tab transition">Inicio</button>
@@ -51,92 +47,89 @@
     <!-- PANTALLA PRINCIPAL (INICIO) -->
     <main id="tab-inicio" class="px-4 py-6 max-w-md mx-auto w-full space-y-8">
         
-        <!-- Hero Section con la Imagen de Fondo y Texto original -->
-        <div class="space-y-1">
+        <!-- Hero Section Texto original -->
+        <div class="space-y-0.5">
             <span class="text-[10px] font-bold text-neonCyan tracking-widest uppercase block">Bienvenidos a Panch Upp</span>
             <h2 class="text-4xl font-black tracking-tighter leading-none italic-title uppercase">
-                EL VERDADERO <br><span class="text-neonCyan text-4xl">SABOR CALLEJERO</span>
+                EL VERDADERO <br><span class="text-neonCyan">SABOR CALLEJERO</span>
             </h2>
-            <p class="text-zinc-400 text-xs pt-1 max-w-[320px]">Panchos premium, ingredientes frescos y el sabor que no vas a encontrar en otro lado.</p>
+            <p class="text-zinc-400 text-[11px] pt-1 max-w-[320px]">Panchos premium, ingredientes frescos y el sabor que no vas a encontrar en otro lado.</p>
         </div>
 
-        <!-- Imagen Destacada del Pancho con flechas de Neón -->
-        <div class="w-full rounded-2xl overflow-hidden shadow-cyan-glow bg-black/40">
-            <img src="https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&q=80&w=800" alt="Panch Upp Premium" class="w-full h-72 object-cover object-center">
+        <!-- Imagen del video con diseño neón de flechas -->
+        <div class="w-full rounded-2xl overflow-hidden relative">
+            <img src="https://lululinnea0-crypto.github.io/panchupp/pancho-neon.jpg" onerror="this.src='https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&q=80&w=800'" alt="Panch Upp Premium" class="w-full object-cover">
         </div>
 
-        <!-- SECCIÓN: NUESTROS PANCHOS -->
-        <div class="space-y-4">
-            <div class="space-y-0.5">
-                <span class="text-[10px] font-bold text-neonCyan tracking-widest uppercase block">Armados a la perfección</span>
-                <h3 class="text-lg font-black uppercase tracking-tight">Nuestros Panchos</h3>
+        <!-- NUESTROS PANCHOS -->
+        <div class="space-y-3">
+            <div class="space-y-px">
+                <span class="text-[9px] font-bold text-neonCyan tracking-widest uppercase block">Armados a la perfección</span>
+                <h3 class="text-base font-black uppercase tracking-tight">Nuestros Panchos</h3>
             </div>
             
-            <div class="grid grid-cols-1 gap-3" id="lista-panchos">
-                <!-- Se renderizan dinámicamente por JS con el diseño oscuro de las capturas -->
+            <div class="grid grid-cols-1 gap-2.5" id="lista-panchos">
+                <!-- Inyección JS fija sin errores -->
             </div>
         </div>
 
-        <!-- SECCIÓN: COMBOS -->
-        <div class="space-y-4 pt-4">
-            <div class="space-y-0.5">
-                <span class="text-[10px] font-bold text-neonCyan tracking-widest uppercase block">Combos destacados</span>
-                <h3 class="text-lg font-black uppercase tracking-tight">Elegí tu favorito</h3>
+        <!-- COMBOS -->
+        <div class="space-y-3 pt-2">
+            <div class="space-y-px">
+                <span class="text-[9px] font-bold text-neonCyan tracking-widest uppercase block">Combos destacados</span>
+                <h3 class="text-base font-black uppercase tracking-tight">Elegí tu favorito</h3>
             </div>
             
-            <div class="grid grid-cols-1 gap-4" id="lista-combos">
-                <!-- Se renderizan dinámicamente por JS en formato card vertical con imagen -->
+            <div class="grid grid-cols-3 gap-2" id="lista-combos">
+                <!-- Grilla triple horizontal como el video original -->
             </div>
         </div>
     </main>
 
-    <!-- PANTALLA MENÚ (Por si quieren ver la lista completa limpia) -->
-    <main id="tab-menu" class="hidden px-4 py-6 max-w-md mx-auto w-full space-y-6">
-        <h2 class="text-2xl font-black uppercase tracking-tight italic-title">Todo el Menú</h2>
-        <div class="space-y-3" id="contenedor-menu-completo">
-            <!-- Render dinámico completo -->
-        </div>
+    <!-- PANTALLA MENÚ -->
+    <main id="tab-menu" class="hidden px-4 py-6 max-w-md mx-auto w-full space-y-4">
+        <h2 class="text-xl font-black uppercase tracking-tight italic-title">Menú Completo</h2>
+        <div class="space-y-2" id="contenedor-menu-completo"></div>
     </main>
 
-    <!-- PANTALLA CARRITO & CHECKOUT -->
+    <!-- PANTALLA CARRITO -->
     <main id="tab-carrito" class="hidden px-4 py-6 max-w-md mx-auto w-full space-y-6">
-        <h2 class="text-2xl font-black uppercase tracking-tight italic-title">Tu Carrito</h2>
-        
-        <div id="items-carrito" class="space-y-3">
-            <p class="text-zinc-500 text-center py-8 text-sm">Tu carrito está vacío.</p>
+        <h2 class="text-xl font-black uppercase tracking-tight italic-title">Tu Carrito</h2>
+        <div id="items-carrito" class="space-y-2">
+            <p class="text-zinc-500 text-center py-8 text-xs">Tu carrito está vacío.</p>
         </div>
 
-        <!-- Checkout Form (Oculto si no hay items) -->
-        <div id="checkout-section" class="hidden space-y-6 pt-4 border-t border-white/10">
+        <!-- Formulario Checkout -->
+        <div id="checkout-section" class="hidden space-y-4 pt-4 border-t border-white/10">
             
-            <!-- SECCIÓN EXTRA: PERSONALIZACIÓN EXCLUSIVA PARA EL SUPER PANCHO -->
+            <!-- Personalización Super Pancho -->
             <div id="personalizacion-pancho" class="hidden space-y-3 bg-cardBg border border-neonCyan/20 p-4 rounded-xl">
-                <h3 class="text-sm font-black tracking-tight text-neonCyan uppercase flex items-center gap-2">✨ Tuneá tu Super Pancho</h3>
-                <p class="text-[11px] text-zinc-400">Sumá los extras que quieras (+ $500 c/u):</p>
+                <h3 class="text-xs font-black tracking-tight text-neonCyan uppercase">✨ Tuneá tu Super Pancho</h3>
+                <p class="text-[10px] text-zinc-400">Elegí los extras que quieras (+ $500 c/u):</p>
                 <div class="grid grid-cols-2 gap-2 text-xs">
-                    <label class="bg-darkBg p-3 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
+                    <label class="bg-black/40 p-2.5 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
                         <input type="checkbox" value="Cheddar" onchange="calcularTotalConExtras()" class="extra-item accent-neonCyan"> Cheddar
                     </label>
-                    <label class="bg-darkBg p-3 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
+                    <label class="bg-black/40 p-2.5 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
                         <input type="checkbox" value="Panceta" onchange="calcularTotalConExtras()" class="extra-item accent-neonCyan"> Panceta
                     </label>
-                    <label class="bg-darkBg p-3 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
+                    <label class="bg-black/40 p-2.5 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
                         <input type="checkbox" value="Cebolla Crispy" onchange="calcularTotalConExtras()" class="extra-item accent-neonCyan"> Cebolla Crispy
                     </label>
-                    <label class="bg-darkBg p-3 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
+                    <label class="bg-black/40 p-2.5 rounded-lg flex items-center gap-2 border border-white/5 cursor-pointer">
                         <input type="checkbox" value="Papas Pay" onchange="calcularTotalConExtras()" class="extra-item accent-neonCyan"> Papas Pay
                     </label>
                 </div>
             </div>
 
-            <h3 class="text-lg font-bold">Datos de entrega</h3>
-            <div class="space-y-3 text-sm">
+            <h3 class="text-sm font-bold uppercase tracking-wide text-zinc-400">Datos de entrega</h3>
+            <div class="space-y-2 text-xs">
                 <input type="text" id="form-nombre" placeholder="Nombre completo" class="w-full bg-cardBg border border-white/10 rounded-xl p-3 text-white placeholder-zinc-500 focus:outline-none focus:border-neonCyan">
                 <input type="tel" id="form-telefono" placeholder="Teléfono" class="w-full bg-cardBg border border-white/10 rounded-xl p-3 text-white placeholder-zinc-500 focus:outline-none focus:border-neonCyan">
                 <input type="text" id="form-direccion" placeholder="Dirección de entrega" class="w-full bg-cardBg border border-white/10 rounded-xl p-3 text-white placeholder-zinc-500 focus:outline-none focus:border-neonCyan">
                 
-                <h4 class="font-semibold text-xs text-zinc-400 pt-1">Método de pago</h4>
-                <div class="grid grid-cols-2 gap-3 text-xs">
+                <h4 class="font-semibold text-[11px] text-zinc-400 pt-1">Método de pago</h4>
+                <div class="grid grid-cols-2 gap-2">
                     <label class="bg-cardBg border border-white/10 p-3 rounded-xl flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="pago" value="Efectivo" checked class="accent-neonCyan"> Efectivo
                     </label>
@@ -145,38 +138,36 @@
                     </label>
                 </div>
 
-                <textarea id="form-obs" placeholder="Observaciones (Ej: sin aderezos, bien caliente)" class="w-full bg-cardBg border border-white/10 rounded-xl p-3 text-white placeholder-zinc-500 h-20 focus:outline-none focus:border-neonCyan"></textarea>
+                <textarea id="form-obs" placeholder="Observaciones (Ej: sin aderezos)" class="w-full bg-cardBg border border-white/10 rounded-xl p-3 text-white placeholder-zinc-500 h-16 focus:outline-none focus:border-neonCyan"></textarea>
             </div>
 
-            <div class="bg-cardBg p-4 rounded-xl space-y-1 text-sm">
+            <div class="bg-cardBg p-4 rounded-xl space-y-1 text-xs">
                 <div class="flex justify-between text-zinc-400"><span>Subtotal</span><span id="subtotal-val">$0</span></div>
-                <div class="flex justify-between font-black text-lg border-t border-white/5 pt-1"><span>Total</span><span id="total-val" class="text-neonCyan">$0</span></div>
+                <div class="flex justify-between font-black text-sm border-t border-white/5 pt-1"><span>Total</span><span id="total-val" class="text-neonCyan">$0</span></div>
             </div>
 
-            <button onclick="enviarPedido()" class="w-full bg-neonCyan hover:bg-opacity-90 text-black font-black py-3.5 rounded-xl text-sm tracking-wider shadow-cyan-glow transition uppercase">
+            <button onclick="enviarPedido()" class="w-full bg-neonCyan text-black font-black py-3 rounded-xl text-xs tracking-wider transition uppercase">
                 Finalizar Pedido (WhatsApp)
             </button>
         </div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="py-6 text-center text-[10px] text-zinc-600 tracking-widest uppercase">
+    <footer class="py-6 text-center text-[9px] text-zinc-600 tracking-widest uppercase">
         ⚡ Panch Upp Co. — Todos los derechos reservados.
     </footer>
 
-    <!-- LOGICA DE LA APLICACIÓN -->
+    <!-- LÓGICA CORE SIN BUGS -->
     <script>
-        // Los productos con los precios exactos de tu captura de pantalla
         const productos = [
-            { id: 1, tipo: 'pancho', nombre: 'PANCHO CLÁSICO', desc: 'Salchicha premium, kétchup, mostaza y papas pay.', precio: 2000, img: 'https://images.unsplash.com/photo-1612240498936-65f5101365d2?auto=format&fit=crop&q=80&w=120' },
-            { id: 2, tipo: 'pancho', nombre: 'SUPER PANCHO ✨', desc: 'Salchicha premium + 4 toppings a elección.', precio: 4500, img: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&q=80&w=120' },
-            { id: 3, tipo: 'pancho', nombre: 'PANCHO CHEDDAR', desc: 'Salchicha premium, abundante cheddar y panceta crocante.', precio: 5500, img: 'https://images.unsplash.com/photo-1541232260342-cca8f3cf28a4?auto=format&fit=crop&q=80&w=120' },
-            { id: 4, tipo: 'pancho', nombre: 'PANCHO AMERICANO', desc: 'Salchicha premium, cheddar, panceta y huevo revuelto.', precio: 7000, img: 'https://images.unsplash.com/photo-1541232260342-cca8f3cf28a4?auto=format&fit=crop&q=80&w=120' },
+            { id: 1, tipo: 'pancho', nombre: 'PANCHO CLÁSICO', desc: 'Salchicha premium, kétchup, mostaza y papas pay.', precio: 2000, img: 'https://lululinnea0-crypto.github.io/panchupp/pancho-clasico.jpg' },
+            { id: 2, tipo: 'pancho', nombre: 'SUPER PANCHO ✨', desc: 'Salchicha premium + toppings a elección.', precio: 4500, img: 'https://lululinnea0-crypto.github.io/panchupp/super-pancho.jpg' },
+            { id: 3, tipo: 'pancho', nombre: 'PANCHO CHEDDAR', desc: 'Salchicha premium, abundante cheddar y panceta.', precio: 6500, img: 'https://lululinnea0-crypto.github.io/panchupp/pancho-cheddar.jpg' },
+            { id: 4, tipo: 'pancho', nombre: 'PANCHO AMERICANO', desc: 'Salchicha premium, cheddar, panceta y huevo.', precio: 7000, img: 'https://lululinnea0-crypto.github.io/panchupp/pancho-americano.jpg' },
             
-            // Sección de Combos de la captura
-            { id: 5, tipo: 'combo', nombre: 'COMBO CLÁSICO', desc: 'Pancho + Papas + Gaseosa', precio: 4500, img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&q=80&w=400' },
-            { id: 6, tipo: 'combo', nombre: 'COMBO SUPREMO', desc: 'Pancho Supremo + Papas + Gaseosa', precio: 5800, img: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&q=80&w=400' },
-            { id: 7, tipo: 'combo', nombre: 'COMBO PANCH UPP', desc: 'Doble Pancho + Papas Grandes + Gaseosa', precio: 8800, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80&w=400' }
+            { id: 5, tipo: 'combo', nombre: 'COMBO CLÁSICO', precio: 4500, img: 'https://lululinnea0-crypto.github.io/panchupp/combo-clasico.jpg' },
+            { id: 6, tipo: 'combo', nombre: 'COMBO SUPREMO', precio: 5800, img: 'https://lululinnea0-crypto.github.io/panchupp/combo-supremo.jpg' },
+            { id: 7, tipo: 'combo', nombre: 'COMBO PANCH UPP', precio: 8800, img: 'https://lululinnea0-crypto.github.io/panchupp/combo-panchupp.jpg' }
         ];
 
         let carrito = [];
@@ -207,51 +198,47 @@
                 const btnText = isSuper ? 'PERSONALIZAR' : 'PEDIR';
 
                 if (prod.tipo === 'pancho') {
-                    // Diseño horizontal exacto de tu captura oscura
                     panchosCont.innerHTML += `
-                        <div class="bg-cardBg rounded-xl p-3 flex items-center justify-between border border-white/5 gap-3">
-                            <div class="flex items-center gap-3 flex-1">
-                                <img src="${prod.img}" class="w-12 h-12 object-cover rounded-lg bg-zinc-800" alt="${prod.nombre}">
-                                <div class="space-y-0.5">
-                                    <h4 class="font-bold text-xs tracking-tight text-white uppercase">${prod.nombre}</h4>
-                                    <p class="text-[10px] text-zinc-400 line-clamp-2 leading-tight max-w-[180px]">${prod.desc}</p>
-                                    <span class="font-black text-xs text-neonCyan block pt-0.5">$${prod.precio.toLocaleString('es-AR')}</span>
+                        <div class="bg-cardBg rounded-xl p-2.5 flex items-center justify-between border border-white/5 gap-2">
+                            <div class="flex items-center gap-2.5 flex-1">
+                                <div class="w-10 h-10 bg-zinc-800 rounded-lg overflow-hidden shrink-0">
+                                    <img src="${prod.img}" onerror="this.src='https://images.unsplash.com/photo-1612240498936-65f5101365d2?auto=format&fit=crop&q=80&w=80'" class="w-full h-full object-cover">
+                                </div>
+                                <div class="space-y-px">
+                                    <h4 class="font-bold text-[11px] text-white tracking-tight uppercase">${prod.nombre}</h4>
+                                    <p class="text-[9px] text-zinc-400 line-clamp-1 max-w-[160px]">${prod.desc}</p>
+                                    <span class="font-black text-[11px] text-neonCyan block">$${prod.precio.toLocaleString('es-AR')}</span>
                                 </div>
                             </div>
-                            <button onclick="agregarAlCarrito(${prod.id})" class="bg-transparent border border-neonCyan text-neonCyan hover:bg-neonCyan hover:text-black font-black px-3 py-1.5 rounded-md text-[10px] tracking-wide transition shrink-0">
+                            <button onclick="agregarAlCarrito(${prod.id})" class="bg-transparent border border-neonCyan text-neonCyan hover:bg-neonCyan hover:text-black font-black px-2.5 py-1 rounded text-[9px] tracking-wide transition uppercase">
                                 ${btnText}
                             </button>
                         </div>
                     `;
                 } else if (prod.tipo === 'combo') {
-                    // Diseño vertical de la grilla inferior de combos
                     combosCont.innerHTML += `
-                        <div class="bg-cardBg rounded-xl overflow-hidden border border-white/5 flex flex-col justify-between">
-                            <img src="${prod.img}" class="w-full h-40 object-cover" alt="${prod.nombre}">
-                            <div class="p-4 space-y-2">
-                                <div>
-                                    <h4 class="font-black text-sm text-white uppercase">${prod.nombre}</h4>
-                                    <p class="text-xs text-zinc-400">${prod.desc}</p>
-                                </div>
-                                <div class="flex justify-between items-center pt-1">
-                                    <span class="font-black text-base text-neonCyan">$${prod.precio.toLocaleString('es-AR')}</span>
-                                    <button onclick="agregarAlCarrito(${prod.id})" class="bg-neonCyan text-black font-black px-4 py-2 rounded-lg text-xs tracking-wider hover:bg-opacity-80 transition uppercase">
-                                        Pedir Combo →
-                                    </button>
-                                </div>
+                        <div class="bg-cardBg rounded-xl overflow-hidden border border-white/5 flex flex-col justify-between p-2 space-y-2">
+                            <div class="w-full h-20 bg-zinc-800 rounded-lg overflow-hidden">
+                                <img src="${prod.img}" onerror="this.src='https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&q=80&w=150'" class="w-full h-full object-cover">
                             </div>
+                            <div class="space-y-1">
+                                <h4 class="font-bold text-[10px] text-white uppercase line-clamp-1">${prod.nombre}</h4>
+                                <span class="font-black text-[10px] text-neonCyan block">$${prod.precio.toLocaleString('es-AR')}</span>
+                            </div>
+                            <button onclick="agregarAlCarrito(${prod.id})" class="w-full bg-zinc-800 text-white font-bold py-1 rounded text-[9px] uppercase hover:bg-neonCyan hover:text-black transition">
+                                Pedir →
+                            </button>
                         </div>
                     `;
                 }
 
-                // Clonar todo en la pestaña "Menú" por orden
                 menuCompletoCont.innerHTML += `
-                    <div class="bg-cardBg p-3 rounded-xl flex justify-between items-center border border-white/5">
+                    <div class="bg-cardBg p-3 rounded-xl flex justify-between items-center text-xs border border-white/5">
+                        <span class="font-bold">${prod.nombre}</span>
                         <div class="flex items-center gap-3">
-                            <div class="font-bold text-xs">${prod.nombre}</div>
+                            <span class="text-neonCyan font-bold">$${prod.precio}</span>
+                            <button onclick="agregarAlCarrito(${prod.id})" class="bg-neonCyan text-black px-2 py-0.5 rounded font-bold text-[10px]">Añadir</button>
                         </div>
-                        <span class="text-xs text-neonCyan font-bold">$${prod.precio}</span>
-                        <button onclick="agregarAlCarrito(${prod.id})" class="text-[10px] bg-zinc-800 px-2 py-1 rounded text-white font-bold">Añadir</button>
                     </div>
                 `;
             });
@@ -271,7 +258,7 @@
             const personalizacionSec = document.getElementById('personalizacion-pancho');
             
             if(carrito.length === 0) {
-                itemsCont.innerHTML = `<p class="text-zinc-500 text-center py-8 text-sm">Tu carrito está vacío.</p>`;
+                itemsCont.innerHTML = `<p class="text-zinc-500 text-center py-8 text-xs">Tu carrito está vacío.</p>`;
                 checkoutSec.classList.add('hidden');
                 personalizacionSec.classList.add('hidden');
                 return;
@@ -290,15 +277,13 @@
                 }
 
                 itemsCont.innerHTML += `
-                    <div class="bg-cardBg p-3 rounded-xl flex justify-between items-center border border-white/5 text-sm">
-                        <div class="flex items-center gap-3">
-                            <div>
-                                <h4 class="font-bold text-xs uppercase">${item.nombre}</h4>
-                                <p class="text-xs text-neonCyan font-semibold">$${item.precio.toLocaleString('es-AR')}</p>
-                            </div>
+                    <div class="bg-cardBg p-3 rounded-xl flex justify-between items-center border border-white/5 text-xs">
+                        <div>
+                            <h4 class="font-bold uppercase text-[11px]">${item.nombre}</h4>
+                            <p class="text-[11px] text-neonCyan font-semibold">$${item.precio.toLocaleString('es-AR')}</p>
                         </div>
                         <button onclick="removerDelCarrito(${index})" class="text-zinc-500 hover:text-white transition">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
                 `;
@@ -338,4 +323,30 @@
             const telefono = document.getElementById('form-telefono').value.trim();
             const direccion = document.getElementById('form-direccion').value.trim();
             const pago = document.querySelector('input[name="pago"]:checked').value;
-            const obs = document.getElementById('form-obs').
+            const obs = document.getElementById('form-obs').value.trim() || 'Ninguna';
+
+            if (!nombre || !telefono || !direccion) {
+                alert('Por favor completá los campos de Nombre, Teléfono y Dirección.');
+                return;
+            }
+
+            let textoProductos = '';
+            let total = totalBaseGlobal;
+            
+            const mapeo = {};
+            carrito.forEach(item => {
+                mapeo[item.nombre] = (mapeo[item.nombre] || 0) + 1;
+            });
+
+            let extrasSeleccionados = [];
+            const personalizacionSec = document.getElementById('personalizacion-pancho');
+            if (!personalizacionSec.classList.contains('hidden')) {
+                const checkboxes = document.querySelectorAll('.extra-item:checked');
+                checkboxes.forEach(cb => extrasSeleccionados.push(cb.value));
+                total += checkboxes.length * 500;
+            }
+
+            for (const [name, qty] of Object.entries(mapeo)) {
+                let modificadores = "";
+                if(name.includes('SUPER PANCHO') && extrasSeleccionados.length > 0) {
+                    modifica
