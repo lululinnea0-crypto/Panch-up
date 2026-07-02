@@ -229,7 +229,6 @@
                 sidebar.classList.remove('translate-x-full');
             } else {
                 sidebar.classList.add('translate-x-full');
-                // Resetear estado del checkout al cerrar el panel lateral
                 checkoutAvanzado = false;
                 document.getElementById('formulario-checkout').classList.add('hidden');
                 document.getElementById('btn-principal-carrito').innerText = "Finalizar Pedido";
@@ -301,11 +300,11 @@
             var container = document.getElementById('carrito-items');
             container.innerHTML = '';
             var total = 0;
-            var totalItems = 0;
 
             document.getElementById('cart-count').innerText = carrito.length;
 
-            if(carrito.length === 0) {
+            if (carrito.length === 0) {
                 container.innerHTML = '<p class="text-zinc-500 text-center py-8 text-sm">Tu carrito está vacío.</p>';
                 document.getElementById('carrito-total').innerText = '$0';
-                document.getElementById('formulario-checkout').classL
+                document.getElementById('formulario-checkout').classList.add('hidden');
+                document.getElementById('btn-principal-carrito').innerText = "Finalizar
