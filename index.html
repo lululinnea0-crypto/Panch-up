@@ -29,7 +29,6 @@
         <div class="font-impact text-3xl tracking-wider text-white">
             PANCH <span class="text-cyan-neon">UPP</span>
         </div>
-        <!-- Botón flotante del carrito en móviles -->
         <button onclick="toggleCarrito()" class="relative border border-cyan-neon text-cyan-neon px-4 py-2 text-xs font-bold tracking-widest uppercase rounded hover:bg-cyan-neon hover:text-black transition">
             🛒 Carrito (<span id="cart-count">0</span>)
         </button>
@@ -73,7 +72,7 @@
                 <button onclick="abrirModal('Pancho Clásico', 2000, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
             </div>
 
-            <!-- Super Pancho (Personalizable) -->
+            <!-- Super Pancho -->
             <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
                 <div class="flex items-center space-x-4">
                     <img src="individual-super.png" alt="Super Pancho" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
@@ -157,13 +156,12 @@
         </div>
     </section>
 
-    <!-- MODAL DE PERSONALIZACIÓN Y SELECCIÓN -->
+    <!-- MODAL DE PERSONALIZACIÓN -->
     <div id="modal-producto" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-gray-950 border border-gray-800 w-full max-w-md rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
             <h2 id="modal-titulo" class="font-impact text-3xl text-white tracking-wide uppercase mb-2"></h2>
             <p id="modal-precio-base" class="text-cyan-neon font-bold text-xl mb-4"></p>
             
-            <!-- Zona de personalización (Se muestra solo si es Super Pancho) -->
             <div id="extras-container" class="hidden border-t border-gray-900 pt-4 mb-4">
                 <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">¿Querés agregar extras? (+ $500 c/u)</h4>
                 <div class="space-y-2">
@@ -175,13 +173,11 @@
                 </div>
             </div>
 
-            <!-- Modificaciones / Quitar ingredientes -->
             <div class="border-t border-gray-900 pt-4 mb-4">
                 <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Quitar ingredientes / Observaciones</h4>
                 <input type="text" id="modal-observaciones" placeholder="Ej: Sin aderezos, sin cebolla..." class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
             </div>
 
-            <!-- Cantidad -->
             <div class="flex items-center justify-between border-t border-gray-900 pt-4 mb-6">
                 <span class="text-sm font-semibold">Cantidad:</span>
                 <div class="flex items-center space-x-3">
@@ -198,21 +194,16 @@
         </div>
     </div>
 
-    <!-- SIDEBAR / SECCIÓN DEL CARRITO -->
+    <!-- SIDEBAR DEL CARRITO -->
     <div id="carrito-sidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-gray-950 border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
         <div>
             <div class="flex justify-between items-center mb-6">
                 <h2 class="font-impact text-3xl tracking-wide uppercase">Tu Pedido</h2>
                 <button onclick="toggleCarrito()" class="text-gray-500 text-xl font-bold">✕</button>
             </div>
-            
-            <!-- Lista de productos añadidos -->
-            <div id="carrito-items" class="space-y-4 max-h-[40vh] overflow-y-auto pr-1">
-                <!-- Se rellena con JS -->
-            </div>
+            <div id="carrito-items" class="space-y-4 max-h-[40vh] overflow-y-auto pr-1"></div>
         </div>
 
-        <!-- Checkout / Formulario final -->
         <div class="border-t border-gray-900 pt-4">
             <div class="flex justify-between text-sm mb-4">
                 <span class="text-gray-400">Total acumulado:</span>
@@ -238,13 +229,13 @@
         </div>
     </div>
 
-    <!-- LOGIC SYSTEM (JAVASCRIPT) -->
+    <!-- LOGIC SYSTEM (CORREGIDO) -->
     <script>
         let carrito = [];
         let productoActual = {};
 
         function abrirModal(nombre, precioBase, esSuper) {
-            productoActual = { nombre, precioBase, esSuper, cantidad: 1 };
+            productoActual = { nombre: nombre, precioBase: precioBase, esSuper: esSuper, cantidad: 1 };
             document.getElementById('modal-titulo').innerText = nombre;
             document.getElementById('modal-precio-base').innerText = `$${precioBase}`;
             document.getElementById('modal-cantidad').innerText = '1';
@@ -277,7 +268,7 @@
             if (productoActual.esSuper) {
                 document.querySelectorAll('.extra-checkbox:checked').forEach(cb => {
                     extras.push(cb.value);
-                    precioExtras += 500; // Costo por extra
+                    precioExtras += 500;
                 });
             }
 
@@ -288,13 +279,14 @@
                 nombre: productoActual.nombre,
                 extras: extras,
                 observaciones: observaciones,
+                canvasCantidad: productoActual.cantidad, // Guardamos la cantidad
                 cantidad: productoActual.cantidad,
                 subtotal: subtotal
             });
 
             cerrarModal();
             actualizarCarritoUI();
-            toggleCarrito(); // Abre el carrito para ver la orden
+            toggleCarrito();
         }
 
         function actualizarCarritoUI() {
@@ -313,4 +305,11 @@
                             <h4 class="font-bold text-sm">${item.nombre} x${item.cantidad}</h4>
                             ${item.extras.length > 0 ? `<p class="text-xs text-cyan-neon font-semibold mt-0.5">+ Extras: ${item.extras.join(', ')}</p>` : ''}
                             ${item.observaciones ? `<p class="text-xs text-gray-500 italic mt-0.5">Nota: ${item.observaciones}</p>` : ''}
-                       
+                            <span class="text-xs text-gray-400 block mt-1">Subtotal: $${item.subtotal}</span>
+                        </div>
+                        <button onclick="eliminarItem(${index})" class="text-red-500 text-xs font-semibold ml-2">Quitar</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cart-count').innerText = t
