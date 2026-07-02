@@ -229,7 +229,7 @@
         </div>
     </div>
 
-    <!-- LOGIC SYSTEM (CORREGIDO) -->
+    <!-- LOGIC SYSTEM COMPLETE -->
     <script>
         let carrito = [];
         let productoActual = {};
@@ -279,7 +279,6 @@
                 nombre: productoActual.nombre,
                 extras: extras,
                 observaciones: observaciones,
-                canvasCantidad: productoActual.cantidad, // Guardamos la cantidad
                 cantidad: productoActual.cantidad,
                 subtotal: subtotal
             });
@@ -303,13 +302,14 @@
                     <div class="bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start">
                         <div>
                             <h4 class="font-bold text-sm">${item.nombre} x${item.cantidad}</h4>
-                            ${item.extras.length > 0 ? `<p class="text-xs text-cyan-neon font-semibold mt-0.5">+ Extras: ${item.extras.join(', ')}</p>` : ''}
-                            ${item.observaciones ? `<p class="text-xs text-gray-500 italic mt-0.5">Nota: ${item.observaciones}</p>` : ''}
-                            <span class="text-xs text-gray-400 block mt-1">Subtotal: $${item.subtotal}</span>
+                            \${item.extras.length > 0 ? \`<p class="text-xs text-cyan-neon font-semibold mt-0.5">+ Extras: \${item.extras.join(', ')}</p>\` : ''}
+                            \${item.observaciones ? \`<p class="text-xs text-gray-500 italic mt-0.5">Nota: \${item.observaciones}</p>\` : ''}
+                            <span class="text-xs text-gray-400 block mt-1">Subtotal: $\${item.subtotal}</span>
                         </div>
-                        <button onclick="eliminarItem(${index})" class="text-red-500 text-xs font-semibold ml-2">Quitar</button>
+                        <button onclick="eliminarItem(\${index})" class="text-red-500 text-xs font-semibold ml-2">Quitar</button>
                     </div>
                 `;
             });
 
-            document.getElementById('cart-count').innerText = t
+            document.getElementById('cart-count').innerText = totalItems;
+            document.getElementById('carrito-total').innerText =
