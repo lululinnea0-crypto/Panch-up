@@ -3,319 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panch Upp - El Verdadero Sabor Callejero</title>
+    <title>Panch Upp – App de pedidos premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0F0F0F',
+                        neonPink: '#FF1E72',
+                        cardBg: '#1E1E1E',
+                        lightGray: '#EAEAEA',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(255, 30, 114, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #030712;
-        }
-        .font-impact {
-            font-family: 'Bebas Neue', sans-serif;
-        }
-        .text-cyan-neon { color: #00e5ff; }
-        .bg-cyan-neon { background-color: #00e5ff; }
-        .border-cyan-neon { border-color: #00e5ff; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #0F0F0F; color: #FFFFFF; }
+        .active-tab { color: #FF1E72; border-bottom: 2px solid #FF1E72; }
     </style>
 </head>
-<body class="text-white antialiased">
+<body class="overflow-x-hidden min-h-screen flex flex-col justify-between">
 
-    <!-- 1. NAVBAR -->
-    <header class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="font-impact text-3xl tracking-wider text-white">
-            PANCH <span class="text-cyan-neon">UPP</span>
+    <header class="bg-cardBg/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center border-b border-white/5">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-black tracking-tighter text-white">PANCH<span class="text-neonPink">UPP</span></span>
         </div>
-        <button onclick="toggleCarrito()" class="relative border border-cyan-neon text-cyan-neon px-4 py-2 text-xs font-bold tracking-widest uppercase rounded hover:bg-cyan-neon hover:text-black transition">
-            🛒 Carrito (<span id="cart-count">0</span>)
-        </button>
+        <nav class="flex gap-6 text-sm font-semibold tracking-wide">
+            <button onclick="switchTab('inicio')" id="btn-inicio" class="pb-1 active-tab transition">Inicio</button>
+            <button onclick="switchTab('menu')" id="btn-menu" class="pb-1 text-zinc-400 hover:text-white transition">Menú</button>
+            <button onclick="switchTab('carrito')" id="btn-carrito" class="pb-1 text-zinc-400 hover:text-white transition flex items-center gap-1">
+                Carrito (<span id="cart-count">0</span>)
+            </button>
+            <button onclick="switchTab('admin')" id="btn-admin" class="pb-1 text-zinc-400 hover:text-white transition text-xs opacity-50">Admin</button>
+        </nav>
     </header>
 
-    <!-- 2. HERO SECTION -->
-    <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-3">Bienvenido a Panch Upp</span>
-            <h1 class="font-impact text-6xl md:text-8xl tracking-wide leading-none mb-2">
-                EL VERDADERO <br>
-                <span class="text-cyan-neon italic">SABOR CALLEJERO</span>
-            </h1>
-            <p class="text-gray-400 text-sm max-w-md mb-8 leading-relaxed">
-                Panchos premium, ingredientes frescos y el sabor que no vas a encontrar en otro lado.
-            </p>
+    <main id="tab-inicio" class="px-6 py-8 max-w-md mx-auto w-full space-y-12">
+        <div class="text-center py-12 space-y-6 animate-fade-in">
+            <h2 class="text-5xl font-black tracking-stretch leading-none uppercase">
+                SUBÍ TU <br><span class="text-neonPink text-6xl shadow-neon drop-shadow-[0_0_10px_#FF1E72]">AURA.</span>
+            </h2>
+            <p class="text-zinc-400 text-sm max-w-[280px] mx-auto">Street food premium, cultura urbana y el verdadero bajón con estilo.</p>
+            <button onclick="switchTab('menu')" class="w-full bg-neonPink hover:bg-opacity-90 text-white font-extrabold py-4 px-8 rounded-full text-lg tracking-wider transition-all transform hover:scale-[1.02] shadow-neon">
+                PEDIR AHORA
+            </button>
         </div>
-        <div class="relative flex justify-center">
-            <img src="pancho-principal.png" alt="Pancho Premium" class="object-contain max-w-full h-auto">
+
+        <div class="bg-gradient-to-r from-neonPink to-purple-600 rounded-3xl p-6 relative overflow-hidden shadow-lg">
+            <div class="z-10 relative max-w-[60%]">
+                <span class="bg-black text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">PROMO WEEKEND</span>
+                <h3 class="text-2xl font-black mt-2 leading-tight">2x1 en Clásicos Urbanos</h3>
+                <p class="text-xs text-white/80 mt-1">Pedí antes de las 20hs.</p>
+            </div>
+            <div class="absolute right-[-20px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full blur-2xl"></div>
+            <div class="absolute right-2 bottom-2 text-6xl">🌭</div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-xl font-extrabold flex items-center gap-2">🔥 Más vendidos</h3>
+            <div class="grid grid-cols-2 gap-4" id="lista-destacados">
+                </div>
         </div>
     </main>
 
-    <!-- 3. SECCIÓN: NUESTROS PANCHOS -->
-    <section class="max-w-7xl mx-auto px-6 py-8">
-        <div class="mb-8">
-            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-1">Armados a la perfección</span>
-            <h2 class="font-impact text-4xl tracking-wide uppercase">Nuestros Panchos</h2>
+    <main id="tab-menu" class="hidden px-6 py-8 max-w-md mx-auto w-full space-y-8">
+        <h2 class="text-3xl font-black uppercase tracking-tight">El Menú</h2>
+        
+        <div class="flex gap-3 overflow-x-auto pb-3 scrollbar-none">
+            <button class="bg-neonPink text-white px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap">🌭 Clásicos</button>
+            <button class="bg-cardBg text-zinc-400 px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap hover:text-white">🔥 Especiales</button>
+            <button class="bg-cardBg text-zinc-400 px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap hover:text-white">👑 Premium</button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            <!-- Pancho Clásico -->
-            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
-                <div class="flex items-center space-x-4">
-                    <img src="individual-clasico.png" alt="Pancho Clásico" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
-                    <div>
-                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Clásico</h3>
-                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, ketchup, mostaza y papas pay.</p>
-                        <div class="text-cyan-neon font-bold text-lg mt-1">$2.000</div>
-                    </div>
-                </div>
-                <button onclick="abrirModal('Pancho Clásico', 2000, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
+        <div class="space-y-6" id="contenedor-menu">
             </div>
+    </main>
 
-            <!-- Super Pancho -->
-            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
-                <div class="flex items-center space-x-4">
-                    <img src="individual-super.png" alt="Super Pancho" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
-                    <div>
-                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Super Pancho ✨</h3>
-                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium + ¡toppings a elección!</p>
-                        <div class="text-cyan-neon font-bold text-lg mt-1">$4.500</div>
-                    </div>
-                </div>
-                <button onclick="abrirModal('Super Pancho', 4500, true)" class="text-xs font-bold text-black bg-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-opacity-80 transition">Personalizar</button>
-            </div>
-
-            <!-- Pancho Cheddar -->
-            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
-                <div class="flex items-center space-x-4">
-                    <img src="individual-cheddar.png" alt="Pancho Cheddar" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
-                    <div>
-                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Cheddar</h3>
-                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, abundante cheddar y panceta crocante.</p>
-                        <div class="text-cyan-neon font-bold text-lg mt-1">$6.500</div>
-                    </div>
-                </div>
-                <button onclick="abrirModal('Pancho Cheddar', 6500, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
-            </div>
-
-            <!-- Pancho Americano -->
-            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
-                <div class="flex items-center space-x-4">
-                    <img src="individual-americano.png" alt="Pancho Americano" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
-                    <div>
-                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Americano</h3>
-                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, cheddar, panceta y cebolla caramelizada.</p>
-                        <div class="text-cyan-neon font-bold text-lg mt-1">$7.000</div>
-                    </div>
-                </div>
-                <button onclick="abrirModal('Pancho Americano', 7000, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. SECCIÓN COMBOS -->
-    <section class="max-w-7xl mx-auto px-6 py-8">
-        <div class="mb-8">
-            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-1">Combos Destacados</span>
-            <h2 class="font-impact text-4xl tracking-wide uppercase">Elegí tu favorito</h2>
+    <main id="tab-carrito" class="hidden px-6 py-8 max-w-md mx-auto w-full space-y-8">
+        <h2 class="text-3xl font-black uppercase tracking-tight">Tu Carrito</h2>
+        
+        <div id="items-carrito" class="space-y-4">
+            <p class="text-zinc-500 text-center py-8">Tu carrito está vacío. ¡Metéle un pancho premium!</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Combo Clásico -->
-            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
-                <img src="combo-clasico.png" alt="Combo Clásico" class="w-full object-cover rounded mb-4">
-                <div>
-                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Clásico</h3>
-                    <p class="text-gray-500 text-xs mb-4">Pancho + Papas + Gaseosa</p>
-                    <div class="text-cyan-neon font-bold text-xl mb-4">$4.500</div>
-                    <button onclick="abrirModal('Combo Clásico', 4500, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
-                </div>
-            </div>
-
-            <!-- Combo Supremo -->
-            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
-                <img src="combo-supremo.png" alt="Combo Supremo" class="w-full object-cover rounded mb-4">
-                <div>
-                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Supremo</h3>
-                    <p class="text-gray-500 text-xs mb-4">Pancho Supreme + Papas + Gaseosa</p>
-                    <div class="text-cyan-neon font-bold text-xl mb-4">$5.800</div>
-                    <button onclick="abrirModal('Combo Supremo', 5800, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
-                </div>
-            </div>
-
-            <!-- Combo Panch Upp -->
-            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
-                <img src="combo-panch-upp.png" alt="Combo Panch Upp" class="w-full object-cover rounded mb-4">
-                <div>
-                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Panch Upp</h3>
-                    <p class="text-gray-500 text-xs mb-4">Doble Pancho + Papas + Gaseosa</p>
-                    <div class="text-cyan-neon font-bold text-xl mb-4">$6.900</div>
-                    <button onclick="abrirModal('Combo Panch Upp', 6900, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL DE PERSONALIZACIÓN -->
-    <div id="modal-producto" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-950 border border-gray-800 w-full max-w-md rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
-            <h2 id="modal-titulo" class="font-impact text-3xl text-white tracking-wide uppercase mb-2"></h2>
-            <p id="modal-precio-base" class="text-cyan-neon font-bold text-xl mb-4"></p>
+        <div id="checkout-section" class="hidden space-y-6 pt-6 border-t border-white/10">
             
-            <div id="extras-container" class="hidden border-t border-gray-900 pt-4 mb-4">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">¿Querés agregar extras? (+ $500 c/u)</h4>
-                <div class="space-y-2">
-                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900"><span class="text-sm">Cheddar</span><input type="checkbox" value="Cheddar" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
-                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900"><span class="text-sm">Panceta</span><input type="checkbox" value="Panceta" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
-                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900"><span class="text-sm">Cebolla crispy</span><input type="checkbox" value="Cebolla crispy" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
-                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900"><span class="text-sm">Papas pay</span><input type="checkbox" value="Papas pay" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
-                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900"><span class="text-sm">Queso extra</span><input type="checkbox" value="Queso extra" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+            <div id="personalizacion-pancho" class="hidden space-y-4 bg-zinc-900/50 border border-neonPink/20 p-5 rounded-2xl">
+                <h3 class="text-lg font-black tracking-tight text-neonPink uppercase flex items-center gap-2">✨ Tuneá tu Super Pancho</h3>
+                <p class="text-xs text-zinc-400">Sumá los ingredientes que quieras (+ $500 c/u):</p>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <label class="bg-cardBg p-3 rounded-xl flex items-center gap-2 border border-white/5 cursor-pointer">
+                        <input type="checkbox" value="Cheddar" onchange="calcularTotalConExtras()" class="extra-item accent-neonPink"> Cheddar
+                    </label>
+                    <label class="bg-cardBg p-3 rounded-xl flex items-center gap-2 border border-white/5 cursor-pointer">
+                        <input type="checkbox" value="Panceta" onchange="calcularTotalConExtras()" class="extra-item accent-neonPink"> Panceta
+                    </label>
+                    <label class="bg-cardBg p-3 rounded-xl flex items-center gap-2 border border-white/5 cursor-pointer">
+                        <input type="checkbox" value="Cebolla Crispy" onchange="calcularTotalConExtras()" class="extra-item accent-neonPink"> Cebolla Crispy
+                    </label>
+                    <label class="bg-cardBg p-3 rounded-xl flex items-center gap-2 border border-white/5 cursor-pointer">
+                        <input type="checkbox" value="Papas Pay" onchange="calcularTotalConExtras()" class="extra-item accent-neonPink"> Papas Pay
+                    </label>
                 </div>
             </div>
 
-            <div class="border-t border-gray-900 pt-4 mb-4">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Quitar ingredientes / Observaciones</h4>
-                <input type="text" id="modal-observaciones" placeholder="Ej: Sin aderezos, sin cebolla..." class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
-            </div>
-
-            <div class="flex items-center justify-between border-t border-gray-900 pt-4 mb-6">
-                <span class="text-sm font-semibold">Cantidad:</span>
-                <div class="flex items-center space-x-3">
-                    <button onclick="alterarCantidad(-1)" class="w-8 h-8 bg-gray-900 rounded-full font-bold flex items-center justify-center">-</button>
-                    <span id="modal-cantidad" class="font-bold text-lg">1</span>
-                    <button onclick="alterarCantidad(1)" class="w-8 h-8 bg-gray-900 rounded-full font-bold flex items-center justify-center">+</button>
-                </div>
-            </div>
-
-            <div class="flex space-x-3">
-                <button onclick="cerrarModal()" class="w-1/2 bg-gray-900 text-gray-400 text-sm font-bold uppercase py-3 rounded-xl">Cancelar</button>
-                <button onclick="agregarAlCarritoConfirmado()" class="w-1/2 bg-cyan-neon text-black text-sm font-bold uppercase py-3 rounded-xl">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SIDEBAR DEL CARRITO -->
-    <div id="carrito-sidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-gray-950 border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
-        <div>
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="font-impact text-3xl tracking-wide uppercase">Tu Pedido</h2>
-                <button onclick="toggleCarrito()" class="text-gray-500 text-xl font-bold">✕</button>
-            </div>
-            <div id="carrito-items" class="space-y-4 max-h-[40vh] overflow-y-auto pr-1"></div>
-        </div>
-
-        <div class="border-t border-gray-900 pt-4">
-            <div class="flex justify-between text-sm mb-4">
-                <span class="text-gray-400">Total acumulado:</span>
-                <span id="carrito-total" class="text-cyan-neon font-bold text-xl">$0</span>
-            </div>
-            
-            <div id="formulario-checkout" class="space-y-3 mb-4 hidden">
-                <input type="text" id="check-nombre" placeholder="Tu Nombre Completo" class="w-full bg-black border border-gray-900 rounded p-2 text-sm focus:outline-none focus:border-cyan-neon">
-                <input type="tel" id="check-telefono" placeholder="Número de Teléfono" class="w-full bg-black border border-gray-900 rounded p-2 text-sm focus:outline-none focus:border-cyan-neon">
-                <input type="text" id="check-direccion" placeholder="Dirección de Entrega (o Retiro)" class="w-full bg-black border border-gray-900 rounded p-2 text-sm focus:outline-none focus:border-cyan-neon">
+            <h3 class="text-xl font-bold">Datos de entrega</h3>
+            <div class="space-y-4">
+                <input type="text" id="form-nombre" placeholder="Nombre completo" class="w-full bg-cardBg border border-white/10 rounded-xl p-4 text-white placeholder-zinc-500 focus:outline-none focus:border-neonPink">
+                <input type="tel" id="form-telefono" placeholder="Teléfono" class="w-full bg-cardBg border border-white/10 rounded-xl p-4 text-white placeholder-zinc-500 focus:outline-none focus:border-neonPink">
+                <input type="text" id="form-direccion" placeholder="Dirección de entrega" class="w-full bg-cardBg border border-white/10 rounded-xl p-4 text-white placeholder-zinc-500 focus:outline-none focus:border-neonPink">
                 
-                <select id="check-pago" class="w-full bg-black border border-gray-900 rounded p-2 text-sm text-gray-400 focus:outline-none focus:border-cyan-neon">
-                    <option value="" disabled selected>Método de Pago</option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Mercado Pago">Mercado Pago</option>
-                    <option value="Transferencia">Transferencia</option>
-                </select>
+                <h4 class="font-semibold text-sm text-zinc-400 pt-2">Método de pago</h4>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="bg-cardBg border border-white/10 p-4 rounded-xl flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="pago" value="Efectivo" checked class="accent-neonPink"> Efectivo
+                    </label>
+                    <label class="bg-cardBg border border-white/10 p-4 rounded-xl flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="pago" value="Mercado Pago" class="accent-neonPink"> MP
+                    </label>
+                </div>
+
+                <textarea id="form-obs" placeholder="Observaciones (Ej: sin aderezos, que el queso esté bien derretido)" class="w-full bg-cardBg border border-white/10 rounded-xl p-4 text-white placeholder-zinc-500 h-24 focus:outline-none focus:border-neonPink"></textarea>
             </div>
 
-            <button id="btn-principal-carrito" onclick="avanzarCheckout()" class="w-full bg-cyan-neon text-black font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl transition hover:bg-opacity-90">
-                Finalizar Pedido
+            <div class="bg-cardBg p-6 rounded-2xl space-y-2">
+                <div class="flex justify-between text-zinc-400 text-sm"><span>Subtotal</span><span id="subtotal-val">$0</span></div>
+                <div class="flex justify-between font-black text-xl border-t border-white/5 pt-2"><span>Total</span><span id="total-val" class="text-neonPink">$0</span></div>
+            </div>
+
+            <button onclick="enviarPedido()" class="w-full bg-neonPink hover:bg-opacity-90 text-white font-extrabold py-4 rounded-full text-lg shadow-neon transition">
+                FINALIZAR PEDIDO (WhatsApp)
             </button>
         </div>
-    </div>
+    </main>
 
-    <!-- LOGIC SYSTEM COMPLETE -->
+    <main id="tab-admin" class="hidden px-6 py-8 max-w-md mx-auto w-full space-y-6">
+        <h2 class="text-3xl font-black uppercase tracking-tight text-neonPink">Dashboard Admin</h2>
+        <div class="bg-cardBg p-4 rounded-2xl grid grid-cols-2 gap-4 text-center">
+            <div class="p-2">
+                <p class="text-xs text-zinc-400">Ventas del día</p>
+                <p class="text-2xl font-black">$48.500</p>
+            </div>
+            <div class="p-2">
+                <p class="text-xs text-zinc-400">Pedidos Activos</p>
+                <p class="text-2xl font-black text-neonPink">3</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-xs text-zinc-600 tracking-widest uppercase">
+        ⚡ Panch Upp Co. — Todos los derechos reservados.
+    </footer>
+
     <script>
+        const productos = [
+            { id: 1, nombre: 'Panch Neo', desc: 'Salchicha premium, lluvia de cebolla crispy y salsa secreta fucsia.', precio: 3800, emoji: '🌭', tag: 'destacado' },
+            { id: 2, nombre: 'Super Pancho ✨', desc: 'Salchicha gigante premium con adición de toppings a elección.', precio: 4500, emoji: '👑', tag: 'destacado' },
+            { id: 3, nombre: 'Panch Cheddar Bomb', desc: 'Triple cheddar fundido, panceta crocante desmenuzada de verdad.', precio: 4300, emoji: '🔥', tag: 'normal' },
+            { id: 4, font: 'normal', nombre: 'Papas Upp', desc: 'Ración gigante de papas fritas con sazonado urbano.', precio: 2500, emoji: '🍟', tag: 'normal' }
+        ];
+
         let carrito = [];
-        let productoActual = {};
+        let totalBaseGlobal = 0;
 
-        function abrirModal(nombre, precioBase, esSuper) {
-            productoActual = { nombre: nombre, precioBase: precioBase, esSuper: esSuper, cantidad: 1 };
-            document.getElementById('modal-titulo').innerText = nombre;
-            document.getElementById('modal-precio-base').innerText = `$${precioBase}`;
-            document.getElementById('modal-cantidad').innerText = '1';
-            document.getElementById('modal-observaciones').value = '';
+        function switchTab(tabName) {
+            ['inicio', 'menu', 'carrito', 'admin'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`btn-${t}`).classList.remove('active-tab');
+                document.getElementById(`btn-${t}`).classList.add('text-zinc-400');
+            });
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`btn-${tabName}`).classList.add('active-tab');
+        }
+
+        function renderApp() {
+            const destacadosCont = document.getElementById('lista-destacados');
+            const menuCont = document.getElementById('contenedor-menu');
             
-            const extrasDiv = document.getElementById('extras-container');
-            if (esSuper) {
-                extrasDiv.classList.remove('hidden');
-                document.querySelectorAll('.extra-checkbox').forEach(cb => cb.checked = false);
-            } else {
-                extrasDiv.classList.add('hidden');
+            destacadosCont.innerHTML = '';
+            menuCont.innerHTML = '';
+
+            productos.forEach(prod => {
+                const isSuper = prod.nombre.includes('Super Pancho');
+                const btnText = isSuper ? 'PERSONALIZAR' : 'AGREGAR';
+
+                const cardHtml = `
+                    <div class="bg-cardBg rounded-2xl p-4 flex flex-col justify-between border border-white/[0.02] hover:border-neonPink/20 transition group">
+                        <div class="text-4xl my-2 transform group-hover:scale-110 transition">${prod.emoji}</div>
+                        <div>
+                            <h4 class="font-bold text-base">${prod.nombre}</h4>
+                            <p class="text-xs text-zinc-400 mt-1 line-clamp-2">${prod.desc}</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-black text-neonPink">$${prod.precio}</span>
+                            <button onclick="agregarAlCarrito(${prod.id})" class="bg-neonPink text-white p-2 rounded-full hover:bg-opacity-80 shadow-neon transition">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                if(prod.tag === 'destacado') {
+                    destacadosCont.innerHTML += cardHtml;
+                }
+
+                menuCont.innerHTML += `
+                    <div class="bg-cardBg rounded-3xl p-5 flex gap-4 items-center border border-white/[0.02]">
+                        <div class="text-5xl">${prod.emoji}</div>
+                        <div class="flex-1 space-y-1">
+                            <h3 class="font-black text-lg">${prod.nombre}</h3>
+                            <p class="text-xs text-zinc-400">${prod.desc}</p>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="font-black text-xl text-neonPink">$${prod.precio}</span>
+                                <button onclick="agregarAlCarrito(${prod.id})" class="bg-neonPink text-white font-bold px-4 py-2 rounded-full text-xs tracking-wider shadow-neon hover:scale-105 transition">
+                                    ${btnText}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function agregarAlCarrito(id) {
+            const prod = productos.find(p => p.id === id);
+            carrito.push({...prod});
+            actualizarCarritoUI();
+            switchTab('carrito');
+        }
+
+        function actualizarCarritoUI() {
+            document.getElementById('cart-count').innerText = carrito.length;
+            const itemsCont = document.getElementById('items-carrito');
+            const checkoutSec = document.getElementById('checkout-section');
+            const personalizacionSec = document.getElementById('personalizacion-pancho');
+            
+            if(carrito.length === 0) {
+                itemsCont.innerHTML = `<p class="text-zinc-500 text-center py-8">Tu carrito está vacío. ¡Metéle un pancho premium!</p>`;
+                checkoutSec.classList.add('hidden');
+                personalizacionSec.classList.add('hidden');
+                return;
             }
+
+            checkoutSec.classList.remove('hidden');
+            itemsCont.innerHTML = '';
             
-            document.getElementById('modal-producto').classList.remove('hidden');
-        }
+            let tieneSuperPancho = false;
+            totalBaseGlobal = 0;
 
-        function cerrarModal() {
-            document.getElementById('modal-producto').classList.add('hidden');
-        }
+            carrito.forEach((item, index) => {
+                totalBaseGlobal += item.precio;
+                if(item.nombre.includes('Super Pancho')) {
+                    tieneSuperPancho = true;
+                }
 
-        function alterarCantidad(val) {
-            productoActual.cantidad = Math.max(1, productoActual.cantidad + val);
-            document.getElementById('modal-cantidad').innerText = productoActual.cantidad;
-        }
-
-        function agregarAlCarritoConfirmado() {
-            let extras = [];
-            let precioExtras = 0;
-            
-            if (productoActual.esSuper) {
-                document.querySelectorAll('.extra-checkbox:checked').forEach(cb => {
-                    extras.push(cb.value);
-                    precioExtras += 500;
-                });
-            }
-
-            const observaciones = document.getElementById('modal-observaciones').value;
-            const subtotal = (productoActual.precioBase + precioExtras) * productoActual.cantidad;
-
-            carrito.push({
-                nombre: productoActual.nombre,
-                extras: extras,
-                observaciones: observaciones,
-                cantidad: productoActual.cantidad,
-                subtotal: subtotal
+                itemsCont.innerHTML += `
+                    <div class="bg-cardBg p-4 rounded-2xl flex justify-between items-center border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">${item.emoji}</span>
+                            <div>
+                                <h4 class="font-bold text-sm">${item.nombre}</h4>
+                                <p class="text-xs text-neonPink font-semibold">$${item.precio}</p>
+                            </div>
+                        </div>
+                        <button onclick="removerDelCarrito(${index})" class="text-zinc-500 hover:text-white transition">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
             });
 
-            cerrarModal();
+            if(tieneSuperPancho) {
+                personalizacionSec.classList.remove('hidden');
+            } else {
+                personalizacionSec.classList.add('hidden');
+            }
+
+            calcularTotalConExtras();
+            lucide.createIcons();
+        }
+
+        function calcularTotalConExtras() {
+            let precioExtras = 0;
+            const personalizacionSec = document.getElementById('personalizacion-pancho');
+            
+            if (!personalizacionSec.classList.contains('hidden')) {
+                const checkboxes = document.querySelectorAll('.extra-item:checked');
+                precioExtras = checkboxes.length * 500;
+            }
+
+            const totalFinal = totalBaseGlobal + precioExtras;
+            document.getElementById('subtotal-val').innerText = `$${totalFinal}`;
+            document.getElementById('total-val').innerText = `$${totalFinal}`;
+        }
+
+        function removerDelCarrito(index) {
+            carrito.splice(index, 1);
             actualizarCarritoUI();
-            toggleCarrito();
         }
 
-                function actualizarCarritoUI() {
-    var container = document.getElementById('carrito-items');
-    container.innerHTML = '';
-    var total = 0;
-    var totalItems = 0;
+        function enviarPedido() {
+            const nombre = document.getElementById('form-nombre').value.trim();
+            const telefono = document.getElementById('form-telefono').value.trim();
+            const direccion = document.getElementById('form-direccion').value.trim();
+            const pago = document.querySelector('input[name="pago"]:checked').value;
+            const obs = document.getElementById('form-obs').value.trim() || 'Ninguna';
 
-    for (var i = 0; i < carrito.length; i++) {
-        var item = carrito[i];
-        total = total + item.subtotal;
-        totalItems = totalItems + item.cantidad;
+            if (!nombre || !telefono || !direccion) {
+                alert('Por favor completá los campos de Nombre, Teléfono y Dirección.');
+                return;
+            }
 
-        var divItem = document.createElement('div');
-        divItem.className = 'bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start';
-        
-        var contenido = '<div><h4 class="font-bold text-sm">' + item.nombre + ' x' + item.cantidad + '</h4>';
-        if (item.extras.length > 0) {
-            contenido += '<p class="text-xs text-cyan-neon font-semibold mt-0.5">+ Extras: ' + item.extras.join(', ') + '</p>';
+            let textoProductos = '';
+            let total = totalBaseGlobal;
+            
+            const mapeo = {};
+            carrito.forEach(item => {
+                mapeo[item.nombre] = (mapeo[item.nombre] || 0) + 1;
+            });
+
+            // Capturar los extras seleccionados
+            let extrasSeleccionados = [];
+            const personalizacionSec = document.getElementById('personalizacion-pancho');
+            if (!personalizacionSec.classList.contains('hidden')) {
+                const checkboxes = document.querySelectorAll('.extra-item:checked');
+                checkboxes.forEach(cb => extrasSeleccionados.push(cb.value));
+                total += checkboxes.length * 500;
+            }
+
+            for (const [name, qty] of Object.entries(mapeo)) {
+                let modificadores = "";
+                if(name.includes('Super Pancho') && extrasSeleccionados.length > 0) {
+                    modificadores = ` (+ Extras: ${extrasSeleccionados.join(', ')})`;
+                }
+                textoProductos += `• ${name}${modificadores}\n  Cantidad: ${qty}\n`;
+            }
+
+            const mensaje = `Hola Panch Upp 🌭\nQuiero hacer el siguiente pedido:\n${textoProductos}Total: $${total}\nNombre: ${nombre}\nForma de entrega: Envíar a ${direccion}\nObservaciones: ${obs}\nMétodo de pago: ${pago}`;
+            
+            const numWhatsApp = "5493512901763";
+            const url = `https://api.whatsapp.com/send?phone=${numWhatsApp}&text=${encodeURIComponent(mensaje)}`;
+            
+            window.open(url, '_blank');
         }
-        if (item.observaciones) {
-            contenido += '<p class="text-xs text-gray-500 italic mt-0.5">Nota: ' + item.observaciones + '</p>';
-        }
-        contenido += '<span class="text-xs text-gray-400 block mt-1">Subtotal: $' + item.subtotal + '</span></div>';
-        contenido += '<button onclick="eliminarItem(' + i + ')" class="text-red-500 text-xs font-semibold ml-2">Quitar</button>';
-        
-        divItem.innerHTML = contenido;
-        container.appendChild(divItem);
-    }
 
-    document.getElementById('cart-count').innerText = totalItems;
-    document.getElementById('carrito-total').innerText = '$' + total;
-}
+        renderApp();
+    </script>
+</body>
+</html>
