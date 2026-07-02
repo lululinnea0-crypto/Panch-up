@@ -291,20 +291,87 @@
             toggleCarrito();
         }
 
-        function removerDelCarrito(index) {
-            carrito.splice(index, 1);
-            actualizarCarritoUI();
+        nclick="removerDelCarrito(' + i + ')" class="text-gray-500 hover:text-red-500 text-xs py-1 px-2 font-bold transition shrink-0">✕</button>';
+                
+                divItem.innerHTML = contenido;
+                container.appendChild(divItem);
+            }
+
+            document.getElementById('carrito-total').innerText = '$' + total.toLocaleString('es-AR');
+        document.getElementById('cart-count').innerText = totalItems;
+}
+
+function removerDelCarrito(indice) {
+    carrito.splice(indice, 1);
+    actualizarCarritoUI();
+}
+
+var checkoutAvanzado = false;
+
+function toggleCarrito() {
+    document.getElementById('carrito-sidebar').classList.toggle('translate-x-full');
+}
+
+        function avanzarCheckout() {
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            var form = document.getElementById('formulario-checkout');
+            var btn = document.getElementById('btn-principal-carrito');
+
+            if (!checkoutAvanzado) {
+                form.classList.remove('hidden');
+                btn.innerText = "Enviar pedido por WhatsApp 🚀";
+                checkoutAvanzado = true;
+            } else {
+                enviarPedidoWhatsApp();
+            }
         }
 
-        function actualizarCarritoUI() {
-            var container = document.getElementById('carrito-items');
-            container.innerHTML = '';
-            var total = 0;
+        function enviarPedidoWhatsApp() {
+            var nombre = document.getElementById('check-nombre').value.trim();
+            var telefono = document.getElementById('check-telefono').value.trim();
+            var direccion = document.getElementById('check-direccion').value.trim();
+            var pago = document.getElementById('check-pago').value;
 
-            document.getElementById('cart-count').innerText = carrito.length;
+            if (!nombre || !telefono || !direccion || !pago) {
+                alert("Por favor completá todos los campos del formulario de entrega y pago.");
+                return;
+            }
 
-            if (carrito.length === 0) {
-                container.innerHTML = '<p class="text-zinc-500 text-center py-8 text-sm">Tu carrito está vacío.</p>';
-                document.getElementById('carrito-total').innerText = '$0';
-                document.getElementById('formulario-checkout').classList.add('hidden');
-                document.getElementById('btn-principal-carrito').innerText = "Finalizar
+            var textoProductos = '';
+            var totalPedido = 0;
+
+            for (var i = 0; i < carrito.length; i++) {
+                var item = carrito[i];
+                totalPedido += item.subtotal;
+                
+                textoProductos += '• ' + item.nombre + ' (x' + item.cantidad + ')\n';
+                if (item.extras.length > 0) {
+                    textoProductos += '  + Extras: ' + item.extras.join(', ') + '\n';
+                }
+                if (item.observaciones) {
+                    textoProductos += '  + Obs: ' + item.observaciones + '\n';
+                }
+                textoProductos += '  Precio: $' + item.subtotal.toLocaleString('es-AR') + '\n\n';
+            }
+
+            var mensaje = 'Hola Panch Upp 🌭\nQuiero realizar el siguiente pedido:\n\n' + 
+                          textoProductos + 
+                          'Total del Pedido: $' + totalPedido.toLocaleString('es-AR') + '\n\n' +
+                          '--- DATOS DE ENTREGA ---\n' +
+                          'Nombre: ' + nombre + '\n' +
+                          'Teléfono: ' + telefono + '\n' +
+                          'Dirección/Entrega: ' + direccion + '\n' +
+                          'Método de Pago: ' + pago;
+
+            var numeroWhatsApp = "5493512901763";
+            var url = "https://api.whatsapp.com/send?phone=" + numeroWhatsApp + "&text=" + encodeURIComponent(mensaje);
+            
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
