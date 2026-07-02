@@ -219,159 +219,365 @@
     </div>
 
     <script>
-        var carrito = [];
-        var productoActual = {};
-        var checkoutAvanzado = false;
+        // ================================
+// PANCH UPP - MOTOR DEL CARRITO
+// ================================
 
-        function toggleCarrito() {
-            var sidebar = document.getElementById('carrito-sidebar');
-            if (sidebar.classList.contains('translate-x-full')) {
-                sidebar.classList.remove('translate-x-full');
-            } else {
-                sidebar.classList.add('translate-x-full');
-                checkoutAvanzado = false;
-                document.getElementById('formulario-checkout').classList.add('hidden');
-                document.getElementById('btn-principal-carrito').innerText = "Finalizar Pedido";
-            }
-        }
+let carrito = [];
+let productoActual = {};
+let checkoutAvanzado = false;
 
-        function abrirModal(nombre, precioBase, esSuper) {
-            productoActual = { nombre: nombre, precioBase: precioBase, esSuper: esSuper, cantidad: 1 };
-            document.getElementById('modal-titulo').innerText = nombre;
-            document.getElementById('modal-precio-base').innerText = '$' + precioBase.toLocaleString('es-AR');
-            document.getElementById('modal-cantidad').innerText = '1';
-            document.getElementById('modal-observaciones').value = '';
-            
-            var extrasDiv = document.getElementById('extras-container');
-            if (esSuper) {
-                extrasDiv.classList.remove('hidden');
-                var cbs = document.querySelectorAll('.extra-checkbox');
-                for (var i = 0; i < cbs.length; i++) { cbs[i].checked = false; }
-            } else {
-                extrasDiv.classList.add('hidden');
-            }
-            
-            document.getElementById('modal-producto').classList.remove('hidden');
-        }
+// --------------------
+// Abrir / cerrar carrito
+// --------------------
+function toggleCarrito() {
+    const sidebar = document.getElementById("carrito-sidebar");
 
-        function cerrarModal() {
-            document.getElementById('modal-producto').classList.add('hidden');
-        }
+    sidebar.classList.toggle("translate-x-full");
 
-        function alterarCantidad(val) {
-            productoActual.cantidad = Math.max(1, productoActual.cantidad + val);
-            document.getElementById('modal-cantidad').innerText = productoActual.cantidad;
-        }
+    if (sidebar.classList.contains("translate-x-full")) {
+        checkoutAvanzado = false;
+        document.getElementById("formulario-checkout").classList.add("hidden");
+        document.getElementById("btn-principal-carrito").innerText =
+            "Finalizar Pedido";
+    }
+}
 
-        function agregarAlCarritoConfirmado() {
-            var extras = [];
-            var precioExtras = 0;
-            
-            if (productoActual.esSuper) {
-                var checkedBoxes = document.querySelectorAll('.extra-checkbox:checked');
-                for (var i = 0; i < checkedBoxes.length; i++) {
-                    extras.push(checkedBoxes[i].value);
-                    precioExtras = precioExtras + 500;
-                }
-            }
+// --------------------
+// Abrir modal
+// --------------------
+function abrirModal(nombre, precioBase, esSuper) {
 
-            var observaciones = document.getElementById('modal-observaciones').value.trim();
-            var subtotal = (productoActual.precioBase + precioExtras) * productoActual.cantidad;
+    productoActual = {
+        nombre,
+        precioBase,
+        esSuper,
+        cantidad: 1
+    };
 
-            carrito.push({
-                nombre: productoActual.nombre,
-                extras: extras,
-                observaciones: observaciones,
-                cantidad: productoActual.cantidad,
-                subtotal: subtotal
+    document.getElementById("modal-titulo").innerText = nombre;
+
+    document.getElementById("modal-precio-base").innerText =
+        "$" + precioBase.toLocaleString("es-AR");
+
+    document.getElementById("modal-cantidad").innerText = 1;
+
+    document.getElementById("modal-observaciones").value = "";
+
+    document
+        .querySelectorAll(".extra-checkbox")
+        .forEach(cb => cb.checked = false);
+
+    if (esSuper) {
+        document
+            .getElementById("extras-container")
+            .classList.remove("hidden");
+    } else {
+        document
+            .getElementById("extras-container")
+            .classList.add("hidden");
+    }
+
+    document
+        .getElementById("modal-producto")
+        .classList.remove("hidden");
+}
+
+// --------------------
+// Cerrar modal
+// --------------------
+function cerrarModal() {
+    document
+        .getElementById("modal-producto")
+        .classList.add("hidden");
+}
+
+// --------------------
+// Cantidad
+// --------------------
+function alterarCantidad(valor) {
+
+    productoActual.cantidad += valor;
+
+    if (productoActual.cantidad < 1) {
+        productoActual.cantidad = 1;
+    }
+
+    document.getElementById("modal-cantidad").innerText =
+        productoActual.cantidad;
+}
+
+// --------------------
+// Agregar al carrito
+// --------------------
+function agregarAlCarritoConfirmado() {
+
+    let extras = [];
+    let precioExtras = 0;
+
+    if (productoActual.esSuper) {
+
+        document
+            .querySelectorAll(".extra-checkbox:checked")
+            .forEach(cb => {
+                extras.push(cb.value);
+                precioExtras += 500;
             });
 
-            cerrarModal();
-            actualizarCarritoUI();
-            toggleCarrito();
-        }
+    }
 
-        nclick="removerDelCarrito(' + i + ')" class="text-gray-500 hover:text-red-500 text-xs py-1 px-2 font-bold transition shrink-0">✕</button>';
-                
-                divItem.innerHTML = contenido;
-                container.appendChild(divItem);
-            }
+    const observaciones =
+        document.getElementById("modal-observaciones").value.trim();
 
-            document.getElementById('carrito-total').innerText = '$' + total.toLocaleString('es-AR');
-        document.getElementById('cart-count').innerText = totalItems;
-}
+    const subtotal =
+        (productoActual.precioBase + precioExtras) *
+        productoActual.cantidad;
 
-function removerDelCarrito(indice) {
-    carrito.splice(indice, 1);
+    carrito.push({
+
+        nombre: productoActual.nombre,
+
+        cantidad: productoActual.cantidad,
+
+        extras,
+
+        observaciones,
+
+        subtotal
+
+    });
+
+    cerrarModal();
+
     actualizarCarritoUI();
-}
 
-var checkoutAvanzado = false;
+    toggleCarrito();
 
-function toggleCarrito() {
-    document.getElementById('carrito-sidebar').classList.toggle('translate-x-full');
-}
+    }
+        // --------------------
+// Actualizar carrito
+// --------------------
+function actualizarCarritoUI() {
 
-        function avanzarCheckout() {
-            if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
-                return;
-            }
+    const container = document.getElementById("carrito-items");
 
-            var form = document.getElementById('formulario-checkout');
-            var btn = document.getElementById('btn-principal-carrito');
+    const totalLabel = document.getElementById("carrito-total");
 
-            if (!checkoutAvanzado) {
-                form.classList.remove('hidden');
-                btn.innerText = "Enviar pedido por WhatsApp 🚀";
-                checkoutAvanzado = true;
-            } else {
-                enviarPedidoWhatsApp();
-            }
+    const contador = document.getElementById("cart-count");
+
+    container.innerHTML = "";
+
+    if (carrito.length === 0) {
+
+        container.innerHTML = `
+            <p class="text-zinc-500 text-center py-8 text-sm">
+                Tu carrito está vacío.
+            </p>
+        `;
+
+        totalLabel.innerText = "$0";
+
+        contador.innerText = "0";
+
+        return;
+    }
+
+    let total = 0;
+
+    let totalItems = 0;
+
+    carrito.forEach((item, indice) => {
+
+        total += item.subtotal;
+
+        totalItems += item.cantidad;
+
+        const tarjeta = document.createElement("div");
+
+        tarjeta.className =
+            "bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start";
+
+        let html = `
+            <div>
+
+                <h4 class="font-bold text-sm">
+                    ${item.nombre} x${item.cantidad}
+                </h4>
+        `;
+
+        if (item.extras.length > 0) {
+
+            html += `
+                <p class="text-xs text-cyan-neon mt-1">
+                    + Extras:
+                    ${item.extras.join(", ")}
+                </p>
+            `;
+
         }
 
-        function enviarPedidoWhatsApp() {
-            var nombre = document.getElementById('check-nombre').value.trim();
-            var telefono = document.getElementById('check-telefono').value.trim();
-            var direccion = document.getElementById('check-direccion').value.trim();
-            var pago = document.getElementById('check-pago').value;
+        if (item.observaciones !== "") {
 
-            if (!nombre || !telefono || !direccion || !pago) {
-                alert("Por favor completá todos los campos del formulario de entrega y pago.");
-                return;
-            }
+            html += `
+                <p class="text-xs text-gray-500 italic mt-1">
+                    ${item.observaciones}
+                </p>
+            `;
 
-            var textoProductos = '';
-            var totalPedido = 0;
-
-            for (var i = 0; i < carrito.length; i++) {
-                var item = carrito[i];
-                totalPedido += item.subtotal;
-                
-                textoProductos += '• ' + item.nombre + ' (x' + item.cantidad + ')\n';
-                if (item.extras.length > 0) {
-                    textoProductos += '  + Extras: ' + item.extras.join(', ') + '\n';
-                }
-                if (item.observaciones) {
-                    textoProductos += '  + Obs: ' + item.observaciones + '\n';
-                }
-                textoProductos += '  Precio: $' + item.subtotal.toLocaleString('es-AR') + '\n\n';
-            }
-
-            var mensaje = 'Hola Panch Upp 🌭\nQuiero realizar el siguiente pedido:\n\n' + 
-                          textoProductos + 
-                          'Total del Pedido: $' + totalPedido.toLocaleString('es-AR') + '\n\n' +
-                          '--- DATOS DE ENTREGA ---\n' +
-                          'Nombre: ' + nombre + '\n' +
-                          'Teléfono: ' + telefono + '\n' +
-                          'Dirección/Entrega: ' + direccion + '\n' +
-                          'Método de Pago: ' + pago;
-
-            var numeroWhatsApp = "5493512901763";
-            var url = "https://api.whatsapp.com/send?phone=" + numeroWhatsApp + "&text=" + encodeURIComponent(mensaje);
-            
-            window.open(url, '_blank');
         }
+
+        html += `
+                <span class="text-xs text-gray-400 block mt-2">
+                    Subtotal:
+                    $${item.subtotal.toLocaleString("es-AR")}
+                </span>
+
+            </div>
+
+            <button
+                onclick="removerDelCarrito(${indice})"
+                class="text-red-500 hover:text-red-300 text-lg font-bold">
+
+                ✕
+
+            </button>
+        `;
+
+        tarjeta.innerHTML = html;
+
+        container.appendChild(tarjeta);
+
+    });
+
+    totalLabel.innerText =
+        "$" + total.toLocaleString("es-AR");
+
+    contador.innerText = totalItems;
+
+}
+
+// --------------------
+// Eliminar producto
+// --------------------
+function removerDelCarrito(indice){
+
+    carrito.splice(indice,1);
+
+    actualizarCarritoUI();
+
+        }
+ // --------------------
+// Checkout
+// --------------------
+function avanzarCheckout() {
+
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    const formulario =
+        document.getElementById("formulario-checkout");
+
+    const boton =
+        document.getElementById("btn-principal-carrito");
+
+    if (!checkoutAvanzado) {
+
+        formulario.classList.remove("hidden");
+
+        boton.innerText =
+            "Enviar pedido por WhatsApp 🚀";
+
+        checkoutAvanzado = true;
+
+        return;
+    }
+
+    enviarPedidoWhatsApp();
+
+}
+        // --------------------
+// Enviar pedido por WhatsApp
+// --------------------
+function enviarPedidoWhatsApp() {
+
+    const nombre = document.getElementById("check-nombre").value.trim();
+    const telefono = document.getElementById("check-telefono").value.trim();
+    const direccion = document.getElementById("check-direccion").value.trim();
+    const pago = document.getElementById("check-pago").value;
+
+    if (!nombre || !telefono || !direccion || !pago) {
+
+        alert("Completá todos los datos.");
+
+        return;
+
+    }
+
+    let mensaje = "🌭 *Pedido Panch Upp*%0A%0A";
+
+    let total = 0;
+
+    carrito.forEach(item => {
+
+        mensaje += "• " + item.nombre;
+
+        mensaje += " x" + item.cantidad + "%0A";
+
+        if (item.extras.length > 0) {
+
+            mensaje += "Extras: " + item.extras.join(", ");
+
+            mensaje += "%0A";
+
+        }
+
+        if (item.observaciones !== "") {
+
+            mensaje += "Obs: " + item.observaciones;
+
+            mensaje += "%0A";
+
+        }
+
+        mensaje += "Subtotal: $" + item.subtotal.toLocaleString("es-AR");
+
+        mensaje += "%0A%0A";
+
+        total += item.subtotal;
+
+    });
+
+    mensaje += "💰 Total: $" + total.toLocaleString("es-AR");
+
+    mensaje += "%0A%0A";
+
+    mensaje += "👤 Nombre: " + nombre;
+
+    mensaje += "%0A";
+
+    mensaje += "📞 Teléfono: " + telefono;
+
+    mensaje += "%0A";
+
+    mensaje += "📍 Dirección: " + direccion;
+
+    mensaje += "%0A";
+
+    mensaje += "💳 Pago: " + pago;
+
+    const numero = "5493512901763";
+
+    window.open(
+
+        "https://wa.me/" + numero + "?text=" + mensaje,
+
+        "_blank"
+
+    );
+
+                                           }
     </script>
 </body>
 </html>
