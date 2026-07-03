@@ -367,18 +367,20 @@ function agregarAlCarritoConfirmado() {
         productoActual.cantidad;
 
     carrito.push({
+    id: Date.now(),
 
-        nombre: productoActual.nombre,
+    nombre: productoActual.nombre,
 
-        cantidad: productoActual.cantidad,
+    precioUnitario: productoActual.precioBase + precioExtras,
 
-        extras,
+    extras: extras,
 
-        observaciones,
+    observaciones: observaciones,
 
-        subtotal
+    cantidad: productoActual.cantidad,
 
-    });
+    subtotal: subtotal
+});
 
     cerrarModal();
 
