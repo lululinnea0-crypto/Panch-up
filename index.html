@@ -361,24 +361,19 @@ function agregarAlCarritoConfirmado() {
 
     carrito.push({
     id: Date.now(),
-
     nombre: productoActual.nombre,
-
     precioUnitario: productoActual.precioBase + precioExtras,
-
     extras: extras,
-
     observaciones: observaciones,
-
     cantidad: productoActual.cantidad,
-
     subtotal: subtotal
 });
 
-    cerrarModal();
+guardarCarrito();
+
+cerrarModal();
 actualizarCarritoUI();
 mostrarToast(productoActual.nombre + " agregado al carrito");
-    }
         // --------------------
 // Actualizar carrito
 // --------------------
