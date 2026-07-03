@@ -508,14 +508,6 @@ function actualizarCarritoUI() {
 // --------------------
 // Eliminar producto
 // --------------------
-function removerDelCarrito(indice){
-
-    carrito.splice(indice,1);
-
-    actualizarCarritoUI();
-
-    guardarCarrito();
-
     function cambiarCantidad(indice, cambio) {
 
     carrito[indice].cantidad += cambio;
