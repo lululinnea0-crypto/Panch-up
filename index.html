@@ -426,8 +426,32 @@ function actualizarCarritoUI() {
             <div>
 
                 <h4 class="font-bold text-sm">
-                    ${item.nombre} x${item.cantidad}
-                </h4>
+    ${item.nombre}
+</h4>
+
+<div class="flex items-center gap-2 mt-2">
+
+    <button
+        onclick="cambiarCantidad(${indice}, -1)"
+        class="bg-gray-800 w-7 h-7 rounded-full">
+
+        ➖
+
+    </button>
+
+    <span class="font-bold">
+        ${item.cantidad}
+    </span>
+
+    <button
+        onclick="cambiarCantidad(${indice}, 1)"
+        class="bg-cyan-neon text-black w-7 h-7 rounded-full">
+
+        ➕
+
+    </button>
+
+</div>
         `;
 
         if (item.extras.length > 0) {
@@ -492,6 +516,28 @@ function removerDelCarrito(indice){
     guardarCarrito();
             
 }
+
+  function cambiarCantidad(indice, cambio) {
+
+    carrito[indice].cantidad += cambio;
+
+    if (carrito[indice].cantidad <= 0) {
+
+        carrito.splice(indice, 1);
+
+    } else {
+
+        carrito[indice].subtotal =
+            carrito[indice].precioUnitario *
+            carrito[indice].cantidad;
+
+    }
+
+    guardarCarrito();
+
+    actualizarCarritoUI();
+
+  }      
  // --------------------
 // Checkout
 // --------------------
