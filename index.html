@@ -207,7 +207,200 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
-    
-</body>
-</html>
+    <script>
+        // ================================
+// PANCH UPP - MOTOR DEL CARRITO
+// ================================
+
+let carrito = [];
+let productoActual = {};
+let checkoutAvanzado = false;
+        // =======================
+// GUARDAR CARRITO
+// =======================
+
+function guardarCarrito() {
+
+    localStorage.setItem(
+
+        "carritoPanchUpp",
+
+        JSON.stringify(carrito)
+
+    );
+
+}
+
+function cargarCarrito() {
+
+    const datos = localStorage.getItem(
+
+        "carritoPanchUpp"
+
+    );
+
+    if(datos){
+
+        carrito = JSON.parse(datos);
+
+        actualizarCarritoUI();
+
+    }
+
+}
+
+// --------------------
+// Abrir / cerrar carrito
+// --------------------
+function toggleCarrito() {
+    const sidebar = document.getElementById("carrito-sidebar");
+
+    sidebar.classList.toggle("translate-x-full");
+
+    if (sidebar.classList.contains("translate-x-full")) {
+        checkoutAvanzado = false;
+        document.getElementById("formulario-checkout").classList.add("hidden");
+        document.getElementById("btn-principal-carrito").innerText =
+            "Finalizar Pedido";
+    }
+}
+
+// --------------------
+// Abrir modal
+// --------------------
+function abrirModal(nombre, precioBase, esSuper) {
+
+    productoActual = {
+        nombre,
+        precioBase,
+        esSuper,
+        cantidad: 1
+    };
+
+    document.getElementById("modal-titulo").innerText = nombre;
+
+    document.getElementById("modal-precio-base").innerText =
+        "$" + precioBase.toLocaleString("es-AR");
+
+    document.getElementById("modal-cantidad").innerText = 1;
+
+    document.getElementById("modal-observaciones").value = "";
+
+    document
+        .querySelectorAll(".extra-checkbox")
+        .forEach(cb => cb.checked = false);
+
+    if (esSuper) {
+        document
+            .getElementById("extras-container")
+            .classList.remove("hidden");
+    } else {
+        document
+            .getElementById("extras-container")
+            .classList.add("hidden");
+    }
+
+    document
+        .getElementById("modal-producto")
+        .classList.remove("hidden");
+}
+
+// --------------------
+// Cerrar modal
+// --------------------
+function cerrarModal() {
+    document
+        .getElementById("modal-producto")
+        .classList.add("hidden");
+}
+
+// --------------------
+// Cantidad
+// --------------------
+function alterarCantidad(valor) {
+
+    productoActual.cantidad += valor;
+
+    if (productoActual.cantidad < 1) {
+        productoActual.cantidad = 1;
+    }
+
+    document.getElementById("modal-cantidad").innerText =
+        productoActual.cantidad;
+}
+
+// --------------------
+// Agregar al carrito
+// --------------------
+function agregarAlCarritoConfirmado() {
+
+    let extras = [];
+    let precioExtras = 0;
+
+    if (productoActual.esSuper) {
+
+        document
+            .querySelectorAll(".extra-checkbox:checked")
+            .forEach(cb => {
+                extras.push(cb.value);
+                precioExtras += 500;
+            });
+
+    }
+
+    const observaciones =
+        document.getElementById("modal-observaciones").value.trim();
+
+    const subtotal =
+        (productoActual.precioBase + precioExtras) *
+        productoActual.cantidad;
+
+    carrito.push({
+    id: Date.now(),
+
+    nombre: productoActual.nombre,
+
+    precioUnitario: productoActual.precioBase + precioExtras,
+
+    extras: extras,
+
+    observaciones: observaciones,
+
+    cantidad: productoActual.cantidad,
+
+    subtotal: subtotal
+});
+
+    cerrarModal();
+
+    actualizarCarritoUI();
+    guardarCarrito();
+    toggleCarrito();
+
+    }
+        // --------------------
+// Actualizar carrito
+// --------------------
+function actualizarCarritoUI() {
+
+    const container = document.getElementById("carrito-items");
+
+    const totalLabel = document.getElementById("carrito-total");
+
+    const contador = document.getElementById("cart-count");
+
+    container.innerHTML = "";
+
+    if (carrito.length === 0) {
+
+        container.innerHTML = `
+            <p class="text-zinc-500 text-center py-8 text-sm">
+                Tu carrito está vacío.
+            </p>
+        `;
+
+        totalLabel.innerText = "$0";
+
+        contador.innerText = "0";
+
+        return
