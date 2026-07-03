@@ -508,32 +508,14 @@ function actualizarCarritoUI() {
 // --------------------
 // Eliminar producto
 // --------------------
-    function cambiarCantidad(indice, cambio) {
+        function removerDelCarrito(indice){
 
-    carrito[indice].cantidad += cambio;
-
-    if (carrito[indice].cantidad <= 0) {
-
-        carrito.splice(indice, 1);
-
-    } else {
-
-        let precioUnitario =
-            carrito[indice].subtotal /
-            (carrito[indice].cantidad - cambio);
-
-        carrito[indice].subtotal =
-            precioUnitario *
-            carrito[indice].cantidad;
-
-    }
-
-    guardarCarrito();
+    carrito.splice(indice,1);
 
     actualizarCarritoUI();
 
-    }
-
+    guardarCarrito();
+            
 }
  // --------------------
 // Checkout
