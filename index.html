@@ -383,98 +383,101 @@ mostrarToast(productoActual.nombre + " agregado al carrito");
 // Actualizar carrito
 // --------------------
 function actualizarCarritoUI() {
-const totalLabel = document.getElementById("carrito-total");  
 
-const contador = document.getElementById("cart-count");  
+    const container = document.getElementById("carrito-items");
 
-    container.innerHTML = "";  
+    const totalLabel = document.getElementById("carrito-total");
 
-if (carrito.length === 0) {  
+    const contador = document.getElementById("cart-count");
 
-    container.innerHTML = `  
-        <p class="text-zinc-500 text-center py-8 text-sm">  
-            Tu carrito está vacío.  
-        </p>  
-    `;  
+        container.innerHTML = "";
 
-    totalLabel.innerText = "$0";  
+    if (carrito.length === 0) {
 
-    contador.innerText = "0";  
+        container.innerHTML = `
+            <p class="text-zinc-500 text-center py-8 text-sm">
+                Tu carrito está vacío.
+            </p>
+        `;
 
-    return;  
-}  
+        totalLabel.innerText = "$0";
 
-let total = 0;  
+        contador.innerText = "0";
 
-let totalItems = 0;  
+        return;
+    }
 
-carrito.forEach((item, indice) => {  
+    let total = 0;
 
-    total += item.subtotal;  
+    let totalItems = 0;
 
-    totalItems += item.cantidad;  
+    carrito.forEach((item, indice) => {
 
-    const tarjeta = document.createElement("div");  
+        total += item.subtotal;
 
-    tarjeta.className =  
-        "bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start";  
+        totalItems += item.cantidad;
 
-    let html = `  
-        <div>  
+        const tarjeta = document.createElement("div");
 
-            <h4 class="font-bold text-sm">  
-                ${item.nombre} x${item.cantidad}  
-            </h4>  
-    `;  
+        tarjeta.className =
+            "bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start";
 
-    if (item.extras.length > 0) {  
+        let html = `
+            <div>
 
-        html += `  
-            <p class="text-xs text-cyan-neon mt-1">  
-                + Extras:  
-                ${item.extras.join(", ")}  
-            </p>  
-        `;  
+                <h4 class="font-bold text-sm">
+                    ${item.nombre} x${item.cantidad}
+                </h4>
+        `;
 
-    }  
+        if (item.extras.length > 0) {
 
-    if (item.observaciones !== "") {  
+            html += `
+                <p class="text-xs text-cyan-neon mt-1">
+                    + Extras:
+                    ${item.extras.join(", ")}
+                </p>
+            `;
 
-        html += `  
-            <p class="text-xs text-gray-500 italic mt-1">  
-                ${item.observaciones}  
-            </p>  
-        `;  
+        }
 
-    }  
+        if (item.observaciones !== "") {
 
-    html += `  
-            <span class="text-xs text-gray-400 block mt-2">  
-                Subtotal:  
-                $${item.subtotal.toLocaleString("es-AR")}  
-            </span>  
+            html += `
+                <p class="text-xs text-gray-500 italic mt-1">
+                    ${item.observaciones}
+                </p>
+            `;
 
-        </div>  
+        }
 
-        <button  
-            onclick="removerDelCarrito(${indice})"  
-            class="text-red-500 hover:text-red-300 text-lg font-bold">  
+        html += `
+                <span class="text-xs text-gray-400 block mt-2">
+                    Subtotal:
+                    $${item.subtotal.toLocaleString("es-AR")}
+                </span>
 
-            ✕  
+            </div>
 
-        </button>  
-    `;  
+            <button
+                onclick="removerDelCarrito(${indice})"
+                class="text-red-500 hover:text-red-300 text-lg font-bold">
 
-    tarjeta.innerHTML = html;  
+                ✕
 
-    container.appendChild(tarjeta);  
+            </button>
+        `;
 
-});  
+        tarjeta.innerHTML = html;
 
-totalLabel.innerText =  
-    "$" + total.toLocaleString("es-AR");  
+        container.appendChild(tarjeta);
 
-contador.innerText = totalItems;
+    });
+
+    totalLabel.innerText =
+        "$" + total.toLocaleString("es-AR");
+
+    contador.innerText = totalItems;
 
 }
 // --------------------
