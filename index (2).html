@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panch Upp - El Verdadero Sabor Callejero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+</head>
+    <link rel="stylesheet" href="css/style.css">
+<body class="text-white antialiased">
+
+    <header class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="font-impact text-3xl tracking-wider text-white">
+            PANCH <span class="text-cyan-neon">UPP</span>
+        </div>
+        <button onclick="toggleCarrito()" class="relative border border-cyan-neon text-cyan-neon px-4 py-2 text-xs font-bold tracking-widest uppercase rounded hover:bg-cyan-neon hover:text-black transition">
+            🛒 Carrito (<span id="cart-count">0</span>)
+        </button>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-3">Bienvenido a Panch Upp</span>
+            <h1 class="font-impact text-6xl md:text-8xl tracking-wide leading-none mb-2">
+                EL VERDADERO <br>
+                <span class="text-cyan-neon italic">SABOR CALLEJERO</span>
+            </h1>
+            <p class="text-gray-400 text-sm max-w-md mb-8 leading-relaxed">
+                Panchos premium, ingredientes frescos y el sabor que no vas a encontrar en otro lado.
+            </p>
+        </div>
+        <div class="relative flex justify-center">
+            <img src="pancho-principal.png" alt="Pancho Premium" class="object-contain max-w-full h-auto">
+        </div>
+    </main>
+
+    <section class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-1">Armados a la perfección</span>
+            <h2 class="font-impact text-4xl tracking-wide uppercase">Nuestros Panchos</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
+                <div class="flex items-center space-x-4">
+                    <img src="individual-clasico.png" alt="Pancho Clásico" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
+                    <div>
+                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Clásico</h3>
+                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, ketchup, mostaza y papas pay.</p>
+                        <div class="text-cyan-neon font-bold text-lg mt-1">$2.000</div>
+                    </div>
+                </div>
+                <button onclick="abrirModal('Pancho Clásico', 2000, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
+            </div>
+
+            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
+                <div class="flex items-center space-x-4">
+                    <img src="individual-super.png" alt="Super Pancho" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
+                    <div>
+                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Super Pancho ✨</h3>
+                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium + ¡toppings a elección!</p>
+                        <div class="text-cyan-neon font-bold text-lg mt-1">$4.500</div>
+                    </div>
+                </div>
+                <button onclick="abrirModal('Super Pancho', 4500, true)" class="text-xs font-bold text-black bg-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-opacity-80 transition">Personalizar</button>
+            </div>
+
+            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
+                <div class="flex items-center space-x-4">
+                    <img src="individual-cheddar.png" alt="Pancho Cheddar" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
+                    <div>
+                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Cheddar</h3>
+                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, abundante cheddar y panceta crocante.</p>
+                        <div class="text-cyan-neon font-bold text-lg mt-1">$6.500</div>
+                    </div>
+                </div>
+                <button onclick="abrirModal('Pancho Cheddar', 6500, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
+            </div>
+
+            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
+                <div class="flex items-center space-x-4">
+                    <img src="individual-americano.png" alt="Pancho Americano" class="w-20 h-20 object-cover rounded-lg border border-gray-800">
+                    <div>
+                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">Pancho Americano</h3>
+                        <p class="text-gray-400 text-xs mt-0.5">Salchicha premium, cheddar, panceta y cebolla caramelizada.</p>
+                        <div class="text-cyan-neon font-bold text-lg mt-1">$7.000</div>
+                    </div>
+                </div>
+                <button onclick="abrirModal('Pancho Americano', 7000, false)" class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">Pedir</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <span class="text-cyan-neon text-xs font-bold tracking-widest uppercase block mb-1">Combos Destacados</span>
+            <h2 class="font-impact text-4xl tracking-wide uppercase">Elegí tu favorito</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
+                <img src="combo-clasico.png" alt="Combo Clásico" class="w-full object-cover rounded mb-4">
+                <div>
+                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Clásico</h3>
+                    <p class="text-gray-500 text-xs mb-4">Pancho + Papas + Gaseosa</p>
+                    <div class="text-cyan-neon font-bold text-xl mb-4">$4.500</div>
+                    <button onclick="abrirModal('Combo Clásico', 4500, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
+                </div>
+            </div>
+
+            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
+                <img src="combo-supremo.png" alt="Combo Supremo" class="w-full object-cover rounded mb-4">
+                <div>
+                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Supremo</h3>
+                    <p class="text-gray-500 text-xs mb-4">Pancho Supreme + Papas + Gaseosa</p>
+                    <div class="text-cyan-neon font-bold text-xl mb-4">$5.800</div>
+                    <button onclick="abrirModal('Combo Supremo', 5800, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
+                </div>
+            </div>
+
+            <div class="bg-black bg-opacity-60 border border-gray-900 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-neon transition group">
+                <img src="combo-panch-upp.png" alt="Combo Panch Upp" class="w-full object-cover rounded mb-4">
+                <div>
+                    <h3 class="font-impact text-2xl tracking-wide uppercase mb-1">Combo Panch Upp</h3>
+                    <p class="text-gray-500 text-xs mb-4">Doble Pancho + Papas + Gaseosa</p>
+                    <div class="text-cyan-neon font-bold text-xl mb-4">$6.900</div>
+                    <button onclick="abrirModal('Combo Panch Upp', 6900, false)" class="w-full border border-gray-800 text-white text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded group-hover:border-cyan-neon group-hover:text-cyan-neon transition">Pedir Combo →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-producto" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-950 border border-gray-800 w-full max-w-md rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+            <h2 id="modal-titulo" class="font-impact text-3xl text-white tracking-wide uppercase mb-2"></h2>
+            <p id="modal-precio-base" class="text-cyan-neon font-bold text-xl mb-4"></p>
+            
+            <div id="extras-container" class="hidden border-t border-gray-900 pt-4 mb-4">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">¿Querés agregar extras? (+ $500 c/u)</h4>
+                <div class="space-y-2">
+                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900 cursor-pointer"><span class="text-sm">Cheddar</span><input type="checkbox" value="Cheddar" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900 cursor-pointer"><span class="text-sm">Panceta</span><input type="checkbox" value="Panceta" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900 cursor-pointer"><span class="text-sm">Cebolla crispy</span><input type="checkbox" value="Cebolla crispy" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900 cursor-pointer"><span class="text-sm">Papas pay</span><input type="checkbox" value="Papas pay" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+                    <label class="flex items-center justify-between bg-black p-2.5 rounded border border-gray-900 cursor-pointer"><span class="text-sm">Queso extra</span><input type="checkbox" value="Queso extra" class="extra-checkbox w-4 h-4 accent-cyan-400"></label>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-900 pt-4 mb-4">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Quitar ingredientes / Observaciones</h4>
+                <input type="text" id="modal-observaciones" placeholder="Ej: Sin aderezos, sin cebolla..." class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
+            </div>
+
+            <div class="flex items-center justify-between border-t border-gray-900 pt-4 mb-6">
+                <span class="text-sm font-semibold">Cantidad:</span>
+                <div class="flex items-center space-x-3">
+                    <button onclick="alterarCantidad(-1)" class="w-8 h-8 bg-gray-900 rounded-full font-bold flex items-center justify-center">-</button>
+                    <span id="modal-cantidad" class="font-bold text-lg">1</span>
+                    <button onclick="alterarCantidad(1)" class="w-8 h-8 bg-gray-900 rounded-full font-bold flex items-center justify-center">+</button>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="cerrarModal()" class="w-1/2 bg-gray-900 text-gray-400 text-sm font-bold uppercase py-3 rounded-xl">Cancelar</button>
+                <button onclick="agregarAlCarritoConfirmado()" class="w-1/2 bg-cyan-neon text-black text-sm font-bold uppercase py-3 rounded-xl">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="carrito-sidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-gray-950 border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+        <div class="flex flex-col flex-1 h-full min-h-0">
+            <div class="flex justify-between items-center mb-6 shrink-0">
+                <h2 class="font-impact text-3xl tracking-wide uppercase">Tu Pedido</h2>
+                <button onclick="toggleCarrito()" class="text-gray-500 text-xl font-bold hover:text-white transition">✕</button>
+            </div>
+            <div id="carrito-items" class="space-y-4 overflow-y-auto pr-1 flex-1 min-h-0">
+                <p class="text-zinc-500 text-center py-8 text-sm">Tu carrito está vacío.</p>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-900 pt-4 shrink-0">
+            <div class="flex justify-between text-sm mb-4">
+                <span class="text-gray-400">Total acumulado:</span>
+                <span id="carrito-total" class="text-cyan-neon font-bold text-xl">$0</span>
+            </div>
+            
+            <div id="formulario-checkout" class="space-y-3 mb-4 hidden">
+                <input type="text" id="check-nombre" placeholder="Tu Nombre Completo" class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
+                <input type="tel" id="check-telefono" placeholder="Número de Teléfono" class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
+                <input type="text" id="check-direccion" placeholder="Dirección de Entrega (o Retiro)" class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
+                
+                <select id="check-pago" class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-gray-400 focus:outline-none focus:border-cyan-neon">
+                    <option value="" disabled selected>Método de Pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Mercado Pago">Mercado Pago</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
+            </div>
+
+            <button id="btn-principal-carrito" onclick="avanzarCheckout()" class="w-full bg-cyan-neon text-black font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl transition hover:bg-opacity-90">
+                Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ================================
+// PANCH UPP - MOTOR DEL CARRITO
+// ================================
+
+let carrito = [];
+let productoActual = {};
+let checkoutAvanzado = false;
+        // =======================
+// GUARDAR CARRITO
+// =======================
+
+function guardarCarrito() {
+
+    localStorage.setItem(
+
+        "carritoPanchUpp",
+
+        JSON.stringify(carrito)
+
+    );
+
+}
+
+function cargarCarrito() {
+
+    const datos = localStorage.getItem(
+
+        "carritoPanchUpp"
+
+    );
+
+    if(datos){
+
+        carrito = JSON.parse(datos);
+
+        actualizarCarritoUI();
+
+    }
+
+}
+
+// --------------------
+// Abrir / cerrar carrito
+// --------------------
+function toggleCarrito() {
+    const sidebar = document.getElementById("carrito-sidebar");
+
+    sidebar.classList.toggle("translate-x-full");
+
+    if (sidebar.classList.contains("translate-x-full")) {
+        checkoutAvanzado = false;
+        document.getElementById("formulario-checkout").classList.add("hidden");
+        document.getElementById("btn-principal-carrito").innerText =
+            "Finalizar Pedido";
+    }
+}
+
+// --------------------
+// Abrir modal
+// --------------------
+function abrirModal(nombre, precioBase, esSuper) {
+
+    productoActual = {
+        nombre,
+        precioBase,
+        esSuper,
+        cantidad: 1
+    };
+
+    document.getElementById("modal-titulo").innerText = nombre;
+
+    document.getElementById("modal-precio-base").innerText =
+        "$" + precioBase.toLocaleString("es-AR");
+
+    document.getElementById("modal-cantidad").innerText = 1;
+
+    document.getElementById("modal-observaciones").value = "";
+
+    document
+        .querySelectorAll(".extra-checkbox")
+        .forEach(cb => cb.checked = false);
+
+    if (esSuper) {
+        document
+            .getElementById("extras-container")
+            .classList.remove("hidden");
+    } else {
+        document
+            .getElementById("extras-container")
+            .classList.add("hidden");
+    }
+
+    document
+        .getElementById("modal-producto")
+        .classList.remove("hidden");
+}
+
+// --------------------
+// Cerrar modal
+// --------------------
+function cerrarModal() {
+    document
+        .getElementById("modal-producto")
+        .classList.add("hidden");
+}
+
+// --------------------
+// Cantidad
+// --------------------
+function alterarCantidad(valor) {
+
+    productoActual.cantidad += valor;
+
+    if (productoActual.cantidad < 1) {
+        productoActual.cantidad = 1;
+    }
+
+    document.getElementById("modal-cantidad").innerText =
+        productoActual.cantidad;
+}
+
+// --------------------
+// Agregar al carrito
+// --------------------
+function agregarAlCarritoConfirmado() {
+
+    let extras = [];
+    let precioExtras = 0;
+
+    if (productoActual.esSuper) {
+
+        document
+            .querySelectorAll(".extra-checkbox:checked")
+            .forEach(cb => {
+                extras.push(cb.value);
+                precioExtras += 500;
+            });
+
+    }
+
+    const observaciones =
+        document.getElementById("modal-observaciones").value.trim();
+
+    const subtotal =
+        (productoActual.precioBase + precioExtras) *
+        productoActual.cantidad;
+
+    carrito.push({
+    id: Date.now(),
+
+    nombre: productoActual.nombre,
+
+    precioUnitario: productoActual.precioBase + precioExtras,
+
+    extras: extras,
+
+    observaciones: observaciones,
+
+    cantidad: productoActual.cantidad,
+
+    subtotal: subtotal
+});
+
+    cerrarModal();
+
+    actualizarCarritoUI();
+    guardarCarrito();
+    toggleCarrito();
+
+    }
+        // --------------------
+// Actualizar carrito
+// --------------------
+function actualizarCarritoUI() {
+
+    const container = document.getElementById("carrito-items");
+
+    const totalLabel = document.getElementById("carrito-total");
+
+    const contador = document.getElementById("cart-count");
+
+    container.innerHTML = "";
+
+    if (carrito.length === 0) {
+
+        container.innerHTML = `
+            <p class="text-zinc-500 text-center py-8 text-sm">
+                Tu carrito está vacío.
+            </p>
+        `;
+
+        totalLabel.innerText = "$0";
+
+        contador.innerText = "0";
+
+        return;
+    }
+
+    let total = 0;
+
+    let totalItems = 0;
+
+    carrito.forEach((item, indice) => {
+
+        total += item.subtotal;
+
+        totalItems += item.cantidad;
+
+        const tarjeta = document.createElement("div");
+
+        tarjeta.className =
+            "bg-black p-3 rounded-xl border border-gray-900 flex justify-between items-start";
+
+        let html = `
+            <div>
+
+                <h4 class="font-bold text-sm">
+                    ${item.nombre} x${item.cantidad}
+                </h4>
+        `;
+
+        if (item.extras.length > 0) {
+
+            html += `
+                <p class="text-xs text-cyan-neon mt-1">
+                    + Extras:
+                    ${item.extras.join(", ")}
+                </p>
+            `;
+
+        }
+
+        if (item.observaciones !== "") {
+
+            html += `
+                <p class="text-xs text-gray-500 italic mt-1">
+                    ${item.observaciones}
+                </p>
+            `;
+
+        }
+
+        html += `
+                <span class="text-xs text-gray-400 block mt-2">
+                    Subtotal:
+                    $${item.subtotal.toLocaleString("es-AR")}
+                </span>
+
+            </div>
+
+            <button
+                onclick="removerDelCarrito(${indice})"
+                class="text-red-500 hover:text-red-300 text-lg font-bold">
+
+                ✕
+
+            </button>
+        `;
+
+        tarjeta.innerHTML = html;
+
+        container.appendChild(tarjeta);
+
+    });
+
+    totalLabel.innerText =
+        "$" + total.toLocaleString("es-AR");
+
+    contador.innerText = totalItems;
+
+}
+
+// --------------------
+// Eliminar producto
+// --------------------
+function removerDelCarrito(indice){
+
+    carrito.splice(indice,1);
+
+    actualizarCarritoUI();
+
+    guardarCarrito();
+
+}
+ // --------------------
+// Checkout
+// --------------------
+function avanzarCheckout() {
+
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    const formulario =
+        document.getElementById("formulario-checkout");
+
+    const boton =
+        document.getElementById("btn-principal-carrito");
+
+    if (!checkoutAvanzado) {
+
+        formulario.classList.remove("hidden");
+
+        boton.innerText =
+            "Enviar pedido por WhatsApp 🚀";
+
+        checkoutAvanzado = true;
+
+        return;
+    }
+
+    enviarPedidoWhatsApp();
+
+}
+        // --------------------
+// Enviar pedido por WhatsApp
+// --------------------
+function enviarPedidoWhatsApp() {
+
+    const nombre = document.getElementById("check-nombre").value.trim();
+    const telefono = document.getElementById("check-telefono").value.trim();
+    const direccion = document.getElementById("check-direccion").value.trim();
+    const pago = document.getElementById("check-pago").value;
+
+    if (!nombre || !telefono || !direccion || !pago) {
+
+        alert("Completá todos los datos.");
+
+        return;
+
+    }
+
+    let mensaje = "🌭 *Pedido Panch Upp*%0A%0A";
+
+    let total = 0;
+
+    carrito.forEach(item => {
+
+        mensaje += "• " + item.nombre;
+
+        mensaje += " x" + item.cantidad + "%0A";
+
+        if (item.extras.length > 0) {
+
+            mensaje += "Extras: " + item.extras.join(", ");
+
+            mensaje += "%0A";
+
+        }
+
+        if (item.observaciones !== "") {
+
+            mensaje += "Obs: " + item.observaciones;
+
+            mensaje += "%0A";
+
+        }
+
+        mensaje += "Subtotal: $" + item.subtotal.toLocaleString("es-AR");
+
+        mensaje += "%0A%0A";
+
+        total += item.subtotal;
+
+    });
+
+    mensaje += "💰 Total: $" + total.toLocaleString("es-AR");
+
+    mensaje += "%0A%0A";
+
+    mensaje += "👤 Nombre: " + nombre;
+
+    mensaje += "%0A";
+
+    mensaje += "📞 Teléfono: " + telefono;
+
+    mensaje += "%0A";
+
+    mensaje += "📍 Dirección: " + direccion;
+
+    mensaje += "%0A";
+
+    mensaje += "💳 Pago: " + pago;
+
+    const numero = "5493512901763";
+
+    window.open(
+
+        "https://wa.me/" + numero + "?text=" + mensaje,
+
+        "_blank"
+
+    );
+
+}
+        // Cargar carrito guardado al abrir la página
+window.onload = function () {
+    cargarCarrito();
+};
+    </script>
+</body>
+</html>
