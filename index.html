@@ -207,6 +207,10 @@
         </div>
     </div>
 
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black border border-cyan-neon text-white px-5 py-3 rounded-xl shadow-xl hidden z-50 transition-all duration-300">
+    ✅ Producto agregado al carrito
+    </div>
+
     <script>
         // ================================
 // PANCH UPP - MOTOR DEL CARRITO
@@ -372,11 +376,8 @@ function agregarAlCarritoConfirmado() {
 });
 
     cerrarModal();
-
-    actualizarCarritoUI();
-    guardarCarrito();
-    toggleCarrito();
-
+actualizarCarritoUI();
+mostrarToast(productoActual.nombre + " agregado al carrito");
     }
         // --------------------
 // Actualizar carrito
@@ -608,6 +609,17 @@ function enviarPedidoWhatsApp() {
 window.onload = function () {
     cargarCarrito();
 };
+
+        function mostrarToast(mensaje) {
+    var toast = document.getElementById("toast");
+
+    toast.innerText = "✅ " + mensaje;
+    toast.classList.remove("hidden");
+
+    setTimeout(function () {
+        toast.classList.add("hidden");
+    }, 2000);
+        }
     </script>
 </body>
 </html>
