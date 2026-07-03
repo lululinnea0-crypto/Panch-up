@@ -509,13 +509,13 @@ function removerDelCarrito(indice){
 
     carrito.splice(indice,1);
 
+    guardarCarrito();
+
     actualizarCarritoUI();
 
-    guardarCarrito();
-            
 }
 
-  function cambiarCantidad(indice, cambio) {
+function cambiarCantidad(indice, cambio) {
 
     carrito[indice].cantidad += cambio;
 
@@ -535,7 +535,8 @@ function removerDelCarrito(indice){
 
     actualizarCarritoUI();
 
-  }      
+}
+        
  // --------------------
 // Checkout
 // --------------------
