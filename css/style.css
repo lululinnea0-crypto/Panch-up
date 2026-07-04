@@ -19,18 +19,20 @@ body {
     border-color: #00e5ff;
 }
 
-@keyframes reboteCarrito {
+@keyframes reboteBoton {
     0% {
         transform: scale(1);
     }
-    40% {
-        transform: scale(1.35);
+
+    50% {
+        transform: scale(1.08);
     }
+
     100% {
         transform: scale(1);
     }
 }
 
-.animar-carrito {
-    animation: reboteCarrito 0.35s ease;
+.animar-boton {
+    animation: reboteBoton 0.35s ease;
 }
