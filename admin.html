@@ -83,6 +83,21 @@
 </main>
 
 </div>
+    <script>
+function guardarPrecios() {
+
+    const precios = {
+        clasico: document.getElementById("precio-clasico").value,
+        super: document.getElementById("precio-super").value,
+        americano: document.getElementById("precio-americano").value
+    };
+
+    localStorage.setItem("preciosPanchUpp", JSON.stringify(precios));
+
+    alert("✅ Precios guardados correctamente");
+}
+    </script>
+}
 
 </body>
 </html>
