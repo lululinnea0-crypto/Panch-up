@@ -508,7 +508,12 @@ function actualizarCarritoUI() {
 
     contador.innerText = totalItems;
 
-}
+contador.classList.remove("animar-carrito");
+
+// Fuerza al navegador a reiniciar la animación
+void contador.offsetWidth;
+
+contador.classList.add("animar-carrito");
 // --------------------
 // Eliminar producto
 // --------------------
