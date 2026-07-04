@@ -735,44 +735,51 @@ window.onload = function () {
 
     const contenedor = document.getElementById("lista-productos");
 
-    contenedor.innerHTML = `
-        <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
+    contenedor.innerHTML = "";
 
-            <div class="flex items-center space-x-4">
+    Object.values(productos).forEach(producto => {
 
-                <img src="individual-clasico.png"
-                     alt="${productos.clasico.nombre}"
-                     class="w-20 h-20 object-cover rounded-lg border border-gray-800">
+        contenedor.innerHTML += `
+            <div class="bg-black bg-opacity-40 border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-cyan-neon transition group">
 
-                <div>
+                <div class="flex items-center space-x-4">
 
-                    <h3 class="font-impact text-2xl tracking-wide uppercase text-white">
-                        ${productos.clasico.nombre}
-                    </h3>
+                    <img src="${producto.imagen}"
+                         alt="${producto.nombre}"
+                         class="w-20 h-20 object-cover rounded-lg border border-gray-800">
 
-                    <p class="text-gray-400 text-xs mt-0.5">
-                        Salchicha premium, ketchup, mostaza y papas pay.
-                    </p>
+                    <div>
 
-                    <div class="text-cyan-neon font-bold text-lg mt-1">
-                        $${productos.clasico.precio.toLocaleString("es-AR")}
+                        <h3 class="font-impact text-2xl tracking-wide uppercase text-white">
+                            ${producto.nombre}
+                        </h3>
+
+                        <p class="text-gray-400 text-xs mt-0.5">
+                            ${producto.descripcion}
+                        </p>
+
+                        <div class="text-cyan-neon font-bold text-lg mt-1">
+                            $${producto.precio.toLocaleString("es-AR")}
+                        </div>
+
                     </div>
 
                 </div>
 
+                <button
+                    onclick="abrirModal('${producto.nombre}', ${producto.precio}, ${producto.esSuper})"
+                    class="text-xs font-bold ${producto.esSuper ? 'text-black bg-cyan-neon' : 'text-cyan-neon border border-cyan-neon'} px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">
+
+                    ${producto.boton}
+
+                </button>
+
             </div>
+        `;
 
-            <button
-                onclick="abrirModal(productos.clasico.nombre, productos.clasico.precio, productos.clasico.esSuper)"
-                class="text-xs font-bold text-cyan-neon border border-cyan-neon px-3 py-1.5 rounded uppercase tracking-wider shrink-0 hover:bg-cyan-neon hover:text-black transition">
+    });
 
-                Pedir
-
-            </button>
-
-        </div>
-    `;
-        }
+}
         
     </script>
  </body>
