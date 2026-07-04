@@ -25,6 +25,13 @@
     🌭 Carrito (<span id="cart-count">0</span>)
 
         </button>
+        <button
+    onclick="pedirClaveAdmin()"
+    class="border border-yellow-400 text-yellow-400 px-4 py-2 text-xs font-bold tracking-widest uppercase rounded hover:bg-yellow-400 hover:text-black transition">
+
+    🔒 Admin
+
+        </button>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -694,6 +701,22 @@ window.onload = function () {
     setTimeout(function () {
         toast.classList.add("hidden");
     }, 2000);
+        }
+
+        function pedirClaveAdmin() {
+
+    const clave = prompt("Ingresá la contraseña de administrador");
+
+    if (clave === "panchupp123") {
+
+        alert("¡Bienvenida al panel de administración!");
+
+    } else if (clave !== null) {
+
+        alert("Contraseña incorrecta");
+
+    }
+
         }
     </script>
 </body>
