@@ -708,19 +708,20 @@ window.onload = function () {
     }, 2000);
         }
 
-        function pedirClaveAdmin() {
+       function pedirClaveAdmin() {
 
     const clave = prompt("Ingresá la contraseña de administrador");
 
     if (clave === "panchupp123") {
 
-        alert("¡Bienvenida al panel de administración!");
+        window.location.href = "admin.html";
 
     } else if (clave !== null) {
 
         alert("Contraseña incorrecta");
 
     }
+
 
         }
         
