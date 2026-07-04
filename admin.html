@@ -57,23 +57,23 @@
 
         <div class="flex justify-between items-center">
             <span>🌭 Pancho Clásico</span>
-            <input type="number" value="3000"
+            <input id="precio-clasico" type="number" value="3000"
                 class="bg-zinc-800 border border-zinc-700 rounded px-3 py-2 w-28 text-right">
         </div>
 
         <div class="flex justify-between items-center">
             <span>🧀 Super Pancho</span>
-            <input type="number" value="5500"
+            <input id="precio-Super" type="number" value="5500"
                 class="bg-zinc-800 border border-zinc-700 rounded px-3 py-2 w-28 text-right">
         </div>
 
         <div class="flex justify-between items-center">
             <span>🇺🇸 Pancho Americano</span>
-            <input type="number" value="5000"
+            <input id="precio-Americano" type="number" value="5000"
                 class="bg-zinc-800 border border-zinc-700 rounded px-3 py-2 w-28 text-right">
         </div>
 
-        <button
+        <button onclick="guardarPrecios()"
             class="mt-6 bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-6 py-3 rounded-xl transition">
             💾 Guardar cambios
         </button>
