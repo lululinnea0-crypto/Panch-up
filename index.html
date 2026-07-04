@@ -229,6 +229,31 @@
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black border border-cyan-neon text-white px-5 py-3 rounded-xl shadow-xl hidden z-50 transition-all duration-300">
     ✅ Producto agregado al carrito
     </div>
+    <div id="panel-admin"
+     class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50">
+
+    <div class="bg-zinc-900 w-[90%] max-w-md rounded-2xl p-6 border border-yellow-400">
+
+        <h2 class="text-yellow-400 text-xl font-bold mb-5">
+            🔒 Panel de Administración
+        </h2>
+
+        <button class="w-full mb-3 bg-cyan-500 text-black py-3 rounded-xl font-bold">
+            💰 Cambiar precios
+        </button>
+
+        <button class="w-full mb-3 bg-cyan-500 text-black py-3 rounded-xl font-bold">
+            ➕ Agregar producto
+        </button>
+
+        <button class="w-full bg-red-600 text-white py-3 rounded-xl font-bold"
+                onclick="cerrarPanelAdmin()">
+            ❌ Cerrar
+        </button>
+
+    </div>
+
+    </div>
 
     <script>
         // ================================
@@ -717,32 +742,6 @@ window.onload = function () {
 
     }
 
-        <div id="panel-admin"
-     class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50">
-
-    <div class="bg-zinc-900 w-[90%] max-w-md rounded-2xl p-6 border border-yellow-400">
-
-        <h2 class="text-yellow-400 text-xl font-bold mb-5">
-            🔒 Panel de Administración
-        </h2>
-
-        <button class="w-full mb-3 bg-cyan-500 text-black py-3 rounded-xl font-bold">
-            💰 Cambiar precios
-        </button>
-
-        <button class="w-full mb-3 bg-cyan-500 text-black py-3 rounded-xl font-bold">
-            ➕ Agregar producto
-        </button>
-
-        <button class="w-full bg-red-600 text-white py-3 rounded-xl font-bold"
-                onclick="cerrarPanelAdmin()">
-            ❌ Cerrar
-        </button>
-
-    </div>
-
-    </div>
-        
     </script>
 </body>
 </html>
