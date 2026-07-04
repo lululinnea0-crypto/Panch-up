@@ -18,3 +18,19 @@ body {
 .border-cyan-neon {
     border-color: #00e5ff;
 }
+
+@keyframes reboteCarrito {
+    0% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1.35);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animar-carrito {
+    animation: reboteCarrito 0.35s ease;
+}
