@@ -187,6 +187,13 @@
                 <span class="text-gray-400">Total acumulado:</span>
                 <span id="carrito-total" class="text-cyan-neon font-bold text-xl">$0</span>
             </div>
+            <button
+    onclick="vaciarCarrito()"
+    class="w-full mb-3 bg-red-600 hover:bg-red-700 text-white font-bold text-sm uppercase tracking-wider py-3 rounded-xl transition">
+
+    🗑️ Vaciar carrito
+
+            </button>
             
             <div id="formulario-checkout" class="space-y-3 mb-4 hidden">
                 <input type="text" id="check-nombre" placeholder="Tu Nombre Completo" class="w-full bg-black border border-gray-900 rounded p-2.5 text-sm text-white focus:outline-none focus:border-cyan-neon">
@@ -536,6 +543,22 @@ function cambiarCantidad(indice, cambio) {
     actualizarCarritoUI();
 
 }
+
+        function vaciarCarrito() {
+
+    if (!confirm("¿Seguro que querés vaciar el carrito?")) {
+        return;
+    }
+
+    carrito = [];
+
+    guardarCarrito();
+
+    actualizarCarritoUI();
+
+    mostrarToast("Carrito vaciado");
+
+        }
         
  // --------------------
 // Checkout
