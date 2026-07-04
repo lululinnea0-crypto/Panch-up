@@ -96,6 +96,19 @@ function guardarPrecios() {
 
     alert("✅ Precios guardados correctamente");
 }
+        function cargarPrecios() {
+
+    const precios = JSON.parse(localStorage.getItem("preciosPanchUpp"));
+
+    if (!precios) return;
+
+    document.getElementById("precio-clasico").value = precios.clasico;
+    document.getElementById("precio-super").value = precios.super;
+    document.getElementById("precio-americano").value = precios.americano;
+
+        }
+
+        cargarPrecios();
 
  </script>
     
