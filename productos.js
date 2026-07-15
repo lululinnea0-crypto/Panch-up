@@ -33,4 +33,5 @@ americano: {
     imagen: "individual-americano.png",
     boton: "Pedir",
     esSuper: false
+}
 };
