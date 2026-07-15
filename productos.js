@@ -25,4 +25,13 @@ const productos = {
         boton: "Pedir",
         esSuper: false
     }
+},
+
+americano: {
+    nombre: "Pancho Americano",
+    precio: 7000,
+    descripcion: "Salchicha premium, cheddar, panceta y cebolla caramelizada.",
+    imagen: "individual-americano.png",
+    boton: "Pedir",
+    esSuper: false
 };
