@@ -24,8 +24,7 @@ const productos = {
         imagen: "individual-cheddar.png",
         boton: "Pedir",
         esSuper: false
-    }
-},
+    },
 
 americano: {
     nombre: "Pancho Americano",
